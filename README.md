@@ -1,7 +1,5 @@
 # PTC-BlueFruitNutrition
 
-# Blue Fruit Nutrición - Sistema Web y Aplicación Móvil
-
 ## Integrantes
 - **Katherine Sofia Ceron Guillen** - *20220026* - Cordinadora  
 - **Rodrigo Leonel Torres Escobar** - *20200594* - Subcordinador  
