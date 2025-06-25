@@ -4,20 +4,20 @@ dotenv.config();
 
 //INFO DEL .ENV
 export const config={
-    db:{
+    db: {
         URI: process.env.MONGO_URI
     },
 
-    server:{
+    server: {
         port: process.env.PORT
     },
 
-    JWT:{
+    JWT: {
         secret: process.env.JWT_SECRET,
         expiresIn: process.env.JWT_EXPIRES
     },
 
-    emailAdmin:{
+    emailAdmin: {
         email: process.env.ADMIN_EMAIL,
         password: process.env.ADMIN_PASSWORD
     },
@@ -26,4 +26,10 @@ export const config={
         email_user: process.env.EMAIL_USER,
         email_pass: process.env.EMAIL_PASS
     },
+
+    cloudinary: {
+        cloudinary_name: process.env.CLOUDINARY_NAME,
+        cloudinary_api_key: process.env.CLOUDINARY_API_KEY,
+        cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET 
+    }
 }
