@@ -1,16 +1,19 @@
 import express from "express";
 import productsController from "../controllers/CtrlProducts.js";
+import multer from "multer";
 
 const router = express.Router()
 
-//son los metodos que va tener products
+//imagenes
+const upload = multer({dest: "public/"})
+
 router.route("/")
 .get(productsController.getProducts)
-.post(productsController.postProducts)
+.post(upload.single("image"), productsController.postProducts) //upload.single("image"), para guardar las nuevas imagenes
 
-//estos van a tener un id, por eso se pone ("/:id")
+
 router.route("/:id")
 .delete(productsController.deleteProducts)
-.put(productsController.putProducts)
+.put(upload.single("image"), productsController.putProducts) //upload.single("image"), para guardar las nuevas imagenes
 
 export default router;

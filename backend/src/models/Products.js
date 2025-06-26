@@ -26,11 +26,17 @@ const productsSchema = new Schema({
         min: 0
     },
 
+    image:{
+        type: String,
+        require: false
+    },
+
     idNutritionalValues: {
         type: Schema.Types.ObjectId,
         ref: nutritionalValues,
         require: true
     },
+
 
 
 }, {
