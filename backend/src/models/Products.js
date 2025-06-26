@@ -1,7 +1,3 @@
-/* fields:
-    name, descripion, flavor, price, content, idNutritionalValues, idSports
-*/
-
 import { Schema, model } from "mongoose";   
 
 const productsSchema = new Schema({
@@ -33,17 +29,13 @@ const productsSchema = new Schema({
 
     idNutritionalValues: {
         type: Schema.Types.ObjectId,
-        ref: nutritionalValues,
+        ref: "NutritionalValues",  // Corregido aquí
         require: true
     },
 
-
-
 }, {
-    //tabla auditoria PRO
     timestamps: true,
     strict: false
 })
-
 
 export default model("Products", productsSchema);

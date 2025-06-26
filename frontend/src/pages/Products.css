@@ -1,201 +1,123 @@
-/* Estilo general para la página */
-body, html {
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap');
+
+:root {
+  --primary: #0f0f1c;
+  --accent: #ffffff;
+  --button: #0f0f1c;
+  --button-text: #ffffff;
+  --border: #ccc;
+  --radius: 10px;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: #fafafa;
   margin: 0;
   padding: 0;
-  height: 100%;  /* Aseguramos que el body ocupe toda la pantalla */
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5; /* Fondo general de la página */
 }
 
-/* Navbar fijo en la parte superior */
-.navbar {
-  position: fixed; /* Hace que el navbar se quede fijo en la parte superior */
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #0c133f; /* Color de fondo del navbar */
-  padding: 15px 20px;
-  z-index: 1000; /* Asegura que el navbar esté encima del contenido */
-}
-
-/* Aseguramos que el contenedor de productos tenga suficiente espacio superior */
-.products-container {
-  padding: 20px;
-  background-color: #f5f5f5;
-  min-height: 100vh;
+.main-container {
+  min-height: calc(100vh - 80px); /* Ajustá si tenés navbar más alto o más bajo */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;  /* Garantiza que ocupe todo el ancho de la pantalla */
-  margin-top: 80px;  /* Añadimos espacio arriba para evitar que se solape con el navbar */
-}
-
-/* Ajustes en los elementos de la página */
-.header {
-  text-align: center;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.search-input {
-  width: 60%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 15px;
-}
-
-.btnfilters {
-  padding: 10px 20px;
-  background-color: #0c133f;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-addproducts {
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* Filtros, mostrando el espacio de manera ordenada */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 1200px; /* Ajuste para pantallas grandes */
-}
-
-.filter-group {
-  flex: 1;
-  min-width: 250px;
-  margin-bottom: 15px;
-}
-
-.filter-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.filter-group select,
-.filter-group input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-}
-
-.btn-dark {
-  padding: 10px 20px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.no-products {
-  text-align: center;
-  margin-top: 50px;
-  color: #333;
-}
-
-/* Ajustes para que las tarjetas de productos se ajusten al tamaño de la pantalla */
-.product-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
   justify-content: center;
-  width: 100%; /* Aseguramos que ocupe todo el ancho */
-  margin-top: 20px;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f9f9f9;
 }
 
-/* Estilo para las tarjetas de producto */
-.product-card {
-  background-color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  padding: 20px;
-  width: 250px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+
+.card-form {
+  background: var(--accent);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  gap: 2rem;
+  max-width: 900px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-left {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.product-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+.image-preview {
+  width: 200px;
+  height: 250px;
+  background: #f0f0f0;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px dashed var(--border);
 }
 
-/* Imagen dentro de la tarjeta de producto */
-.product-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
+.image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-.product-card h3 {
-  font-size: 18px;
-  margin-top: 10px;
+.upload-btn {
+  margin-top: 1rem;
+  background-color: var(--primary);
+  color: var(--button-text);
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--radius);
+  cursor: pointer;
 }
 
-.product-card p {
-  color: #666;
-  font-size: 14px;
-  margin-top: 10px;
+.form-right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.product-card .price {
-  font-size: 18px;
-  color: #28a745;
+.form-right input,
+.form-right textarea {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  background-color: #fff; /* Corrige campos oscuros */
+  color: #000;
+}
+
+.row-fields {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.clear-btn,
+.submit-btn {
+  background-color: var(--primary);
+  color: var(--button-text);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
   font-weight: bold;
-}
-
-/* Responsividad para pantallas pequeñas */
-@media (max-width: 768px) {
-  .search-input {
-    width: 80%;
-  }
-
-  .product-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .product-card {
-    width: 90%;
-    max-width: 350px;
-  }
-
-  .filters {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .filter-group {
-    min-width: 100%;
-    margin-bottom: 10px;
-  }
-
-  .btnfilters, .btn-addproducts {
-    width: 100%;
-    margin-top: 10px;
-  }
 }

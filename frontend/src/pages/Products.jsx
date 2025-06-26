@@ -1,143 +1,106 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import './Products.css';
-import CardClothing from '../components/CardProducts/CardProducts';
+import React, { useState } from "react"; 
+import "./Products.css";
 
-const Products = () => {
-  const navigate = useNavigate();
-  const [query, setQuery] = useState('');
-  const [showFilters, setShowFilters] = useState(false);
-  const [collectionFilter, setCollectionFilter] = useState('');
-  const [colorFilter, setColorFilter] = useState('');
-  const [categoryFilter, setCategoryFilter] = useState('');
-  const [sortOrder, setSortOrder] = useState('');
-  const [maxPrice, setMaxPrice] = useState(200);
-  const [products, setProducts] = useState([]);
-  const [collections, setCollections] = useState([]);
-  const [colors, setColors] = useState([]);
-  const [categories, setCategories] = useState([]);
+function AddProduct() {
+  const [form, setForm] = useState({
+    name: "",
+    description: "",
+    flavor: "",
+    content: "",
+    image: null,
+  });
 
-  useEffect(() => {
-    fetch('http://localhost:3001/api/product', { credentials: 'include' })
-      .then(res => res.ok ? res.json() : Promise.reject('Error fetching products'))
-      .then(data => {
-        setProducts(data);
-        setCollections([...new Set(data.map(product => product.coleccion))]);
-        setColors([...new Set(data.map(product => product.color))]);
-        setCategories([...new Set(data.map(product => product.category))]);
-      })
-      .catch(err => console.error(err));
-  }, []);
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-  const filteredClothes = products
-    .filter(item => {
-      const q = query.toLowerCase();
-      const matchSearch =
-        (item.name && item.name.toLowerCase().includes(q)) ||
-        (item.coleccion && item.coleccion.toLowerCase().includes(q)) ||
-        (item.color && item.color.toLowerCase().includes(q)) ||
-        (item.category && item.category.toLowerCase().includes(q)) ||
-        (!isNaN(query) && Math.abs(item.price - parseFloat(query)) < 5);
+  const handleImageChange = (e) => {
+    setForm({ ...form, image: e.target.files[0] });
+  };
 
-      const matchFilters =
-        (collectionFilter ? item.coleccion?.toLowerCase() === collectionFilter.toLowerCase() : true) &&
-        (colorFilter ? item.color?.toLowerCase() === colorFilter.toLowerCase() : true) &&
-        (categoryFilter ? item.category?.toLowerCase() === categoryFilter.toLowerCase() : true) &&
-        item.price <= maxPrice;
+  const handleReset = () => {
+    setForm({
+      name: "",
+      description: "",
+      flavor: "",
+      content: "",
+      image: null,
+    });
+  };
 
-      return matchSearch && matchFilters;
-    })
-    .sort((a, b) => (sortOrder === 'asc' ? a.price - b.price : sortOrder === 'desc' ? b.price - a.price : 0));
-
-  const clearFilters = () => {
-    setCollectionFilter('');
-    setColorFilter('');
-    setCategoryFilter('');
-    setMaxPrice(200);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Producto enviado:", form);
+    // Aquí va la llamada a la API si se requiere
   };
 
   return (
-    <div className="products-container">
-      <div className="header">
-        <h1>{categoryFilter ? categoryFilter.toUpperCase() : 'ALL PRODUCTS'}</h1>
-        <div className="d-flex justify-content-center align-items-center mb-4 gap-3">
+    <div className="main-container">
+      <h2 className="title">Añadir un nuevo Producto</h2>
+      <div className="card-form">
+        <div className="form-left">
+          <div className="image-preview">
+            {form.image ? (
+              <img src={URL.createObjectURL(form.image)} alt="preview" />
+            ) : (
+              <img src="/producticon.png" alt="placeholder" />
+            )}
+          </div>
+          <input
+            type="file"
+            id="imageUpload"
+            accept="image/*"
+            onChange={handleImageChange}
+            hidden
+          />
+          <label htmlFor="imageUpload" className="upload-btn">
+            Subir Imagen
+          </label>
+        </div>
+
+        <form className="form-right" onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="Search for items..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="search-input"
+            name="name"
+            placeholder="Nombre:"
+            value={form.name}
+            onChange={handleChange}
           />
-          <button className="btn btnfilters" onClick={() => setShowFilters(!showFilters)}>
-            {showFilters ? 'Hide filters' : 'Show filters'}
-          </button>
-          <Link to="/addproduct" className="btn btn-addproducts">+ Add products</Link>
-        </div>
-      </div>
-
-      {showFilters && (
-        <div className="filters">
-          <div className="filter-group">
-            <label>Collection</label>
-            <select value={collectionFilter} onChange={(e) => setCollectionFilter(e.target.value)}>
-              <option value="">All</option>
-              {collections.map((collection) => (
-                <option key={collection} value={collection}>{collection}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className="filter-group">
-            <label>Color</label>
-            <select value={colorFilter} onChange={(e) => setColorFilter(e.target.value)}>
-              <option value="">All</option>
-              {colors.map((color) => (
-                <option key={color} value={color}>{color}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className="filter-group">
-            <label>Category</label>
-            <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
-              <option value="">All</option>
-              {categories.map((category) => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className="filter-group">
-            <label>Max Price</label>
+          <textarea
+            name="description"
+            placeholder="Descripción:"
+            value={form.description}
+            onChange={handleChange}
+            rows="4"
+          />
+          <div className="row-fields">
             <input
-              type="number"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-              min="0"
+              type="text"
+              name="flavor"
+              placeholder="Sabor:"
+              value={form.flavor}
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              name="content"
+              placeholder="Contenido Neto:"
+              value={form.content}
+              onChange={handleChange}
             />
           </div>
-
-          <div className="d-flex justify-content-end">
-            <button className="btn btn-dark" onClick={clearFilters}>Clear Filters</button>
+          <div className="form-buttons">
+            <button type="button" onClick={handleReset} className="clear-btn">
+              Limpiar Formulario
+            </button>
+            <button type="submit" className="submit-btn">
+              Agregar Producto
+            </button>
           </div>
-        </div>
-      )}
-
-      {filteredClothes.length === 0 && (
-        <div className="no-products">
-          <h5>No products found with the selected filters or search.</h5>
-        </div>
-      )}
-
-      <div className="product-cards">
-        {filteredClothes.map((item) => (
-          <div key={item._id} className="product-card">
-            <CardClothing {...item} />
-          </div>
-        ))}
+        </form>
       </div>
     </div>
   );
-};
+}
 
-export default Products;
+export default AddProduct;
