@@ -1,5 +1,5 @@
 /*fields:
-    name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idProduct
+    name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idSports
 */
 
 import { Schema, model } from "mongoose";
@@ -66,9 +66,10 @@ const customersSchema = new Schema({
         require: true
     },
 
-    idProducts: {
+    //tabla de deportes
+    idSports: {
         type: Schema.Types.ObjectId,
-        ref: products,
+        ref: sports,
         require: true
     }
 

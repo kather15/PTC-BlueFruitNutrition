@@ -10,8 +10,8 @@ customersController.getCustomers = async(req, res) =>{
 
 //INSERT*******************************************************************
 customersController.postCustomers = async(req, res) =>{
-    const{ name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idProduct, isVerified } = req.body;
-    const newCustomer = new customersModel({name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idProduct, isVerified})
+    const{ name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idSports, isVerified } = req.body;
+    const newCustomer = new customersModel({name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idSports, isVerified})
     await newCustomer.save();
 
     res.json({message: "Customer saved"})
@@ -26,9 +26,9 @@ customersController.deleteCustomers = async(req,res) =>{
 
 //UPDATE*******************************************************************
 customersController.putCustomers = async(req, res)=>{
-    const{ name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idProduct, isVerified } = req.body;
+    const{ name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idSports, isVerified } = req.body;
     const updateCustomer = await customersModel.findByIdAndUpdate(req.params.id, {name, lastName, email, password, phone, weight, dateBirth, height,
-                                                                                address, gender, idProduct, isVerified}, {new: true})
+                                                                                address, gender, idSports, isVerified}, {new: true})
 
     res.json({message: "Customer updated successfully"})
 }
