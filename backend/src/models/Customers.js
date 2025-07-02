@@ -69,8 +69,8 @@ const customersSchema = new Schema({
     //tabla de deportes
     idSports: {
         type: Schema.Types.ObjectId,
-        ref: sports,
-        require: true
+        ref: "Sport",
+        require: false
     }
 
     },{
