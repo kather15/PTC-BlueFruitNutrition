@@ -29,8 +29,7 @@ registerCustomersController.register = async (req, res) => {
         await newCustomer.save();
 
         //GENERAR UN CODIGO ALEATORIO PARA VERIFICAR
-        //esto genera un codigo con 3 digitos (numeros)
-        const verificationCode = crypto.randomBytes(3).toString("hex")
+        const verificationCode = Math.floor(10000 + Math.random() * 90000).toString();
 
         //generar un token que contenga el codigo de verificacion-------------
         const tokenCode = jsonwebtoken.sign(
