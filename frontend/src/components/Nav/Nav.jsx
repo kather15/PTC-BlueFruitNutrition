@@ -10,7 +10,7 @@ const NavBar = () => {
         </div>
         <ul className="navbar-list">
           <li><a href="inicio">Inicio</a></li>
-          <li><a href="productos">Productos</a></li>
+          <li><a href="productos1">Productos</a></li>
           <li><a href="ordenes">Órdenes</a></li>
           <li><a href="ventas">Ventas</a></li>
           <li><a href="suscripciones">Suscripciones</a></li>

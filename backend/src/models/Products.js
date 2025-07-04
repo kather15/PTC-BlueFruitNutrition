@@ -3,34 +3,34 @@ import { Schema, model } from "mongoose";
 const productsSchema = new Schema({
     name:{
         type: String,
-        require: true
+        required: true
     },
 
     description:{
         type: String,
-        require: true
+        required: true
     },
 
     flavor:{
         type: String,
-        require: true,
+        required: true,
     },
 
     price:{
         type: Number,
-        require: true,
+        required: true,
         min: 0
     },
 
     image:{
         type: String,
-        require: false
+        required: false
     },
 
     idNutritionalValues: {
         type: Schema.Types.ObjectId,
         ref: "NutritionalValues",  // Corregido aquí
-        require: true
+        required: true
     },
 
 }, {

@@ -1,5 +1,7 @@
 const productsController = {};
 import productsModel from "../models/Products.js"
+import "../models/NutritionalValues.js"; // Importa el modelo para que se registre
+
 import { config } from "../config.js"
 import { v2 as cloudinary } from "cloudinary"
 
@@ -21,7 +23,7 @@ productsController.getProducts = async (req, res) => {
 productsController.postProducts = async (req, res) => {
 
     try {
-        const { name, descripion, flavor, price, idNutritionalValues } = req.body;
+        const { name, description, flavor, price, idNutritionalValues } = req.body;
         let imageUrl = ""
 
         if (req.file) {
@@ -34,7 +36,7 @@ productsController.postProducts = async (req, res) => {
             )
             imageUrl = result.secure_url
         }
-        const newProduct = new productsModel({ name, descripion, flavor, price, image: imageUrl, idNutritionalValues })
+        const newProduct = new productsModel({ name, description, flavor, price, image: imageUrl, idNutritionalValues })
         await newProduct.save()
 
         res.json({ message: "Product saved" })
@@ -55,7 +57,7 @@ productsController.deleteProducts = async (req, res) => {
 
 //UPDATE*************************************************
 productsController.putProducts = async (req, res) => {
-    const { name, descripion, flavor, price, idNutritionalValues } = req.body;
+    const { name, description, flavor, price, idNutritionalValues } = req.body;
     let imageURL = "";
 
     //subir la imagen
@@ -66,7 +68,7 @@ productsController.putProducts = async (req, res) => {
       });
       imageURL = result.secure_url;
     }
-    const updateProducts = await productsModel.findByIdAndUpdate(req.params.id, { name, descripion, flavor, price, image: imageURL, idNutritionalValues }, { new: true })
+    const updateProducts = await productsModel.findByIdAndUpdate(req.params.id, { name, description, flavor, price, image: imageURL, idNutritionalValues }, { new: true })
 
     res.json({ message: "Products updated successfully" })
 };
