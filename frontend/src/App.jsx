@@ -8,7 +8,6 @@ function App() {
   return (
     <Router>
       <NavBar />
-      
       <div className="main-content" style={{ paddingTop: '100px' }}>
         <Routes>
           <Route path="/" element={<h1>Bienvenido a la tienda</h1>} />
@@ -17,7 +16,6 @@ function App() {
           <Route path="/sobre-nosotros" element={<h1>Sobre Nosotros</h1>} />
         </Routes>
       </div>
-
       <Footer /> {/* Footer agregado */}
     </Router>
   );
