@@ -11,7 +11,7 @@ const Nav = () => {
         <ul className="navbar-list">
           <li><a href="inicio">Inicio</a></li>
           <li><a href="sobreNosotros">Sobre Nosotros</a></li>
-          <li><a href="productos">Prodductos</a></li>
+          <li><a href="productos">Productos</a></li>  
           <li><a href="sabores">Sabores</a></li>
           <li><a href="beneficios">Beneficios</a></li>
         </ul>
