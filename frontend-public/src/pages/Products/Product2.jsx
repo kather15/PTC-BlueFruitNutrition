@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import './Product2.css';
 
-const Product = () => {
+const Product2 = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [selectedVariant, setSelectedVariant] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviews, setReviews] = useState([
@@ -11,7 +16,7 @@ const Product = () => {
       id: 1,
       user: "María González",
       rating: 5,
-      comment: "¡Excelente proteína! El sabor chocolate es increíble y se mezcla muy bien. La recomiendo 100%.",
+      comment: "¡Excelente producto! El sabor es increíble y se mezcla muy bien. La recomiendo 100%.",
       date: "15 Nov 2024"
     },
     {
@@ -42,32 +47,38 @@ const Product = () => {
     comment: ''
   });
 
-  const product = {
-    name: "Proteína Whey Premium",
-    description: "Proteína whey aislada de alta calidad con bioactividad superior y propiedades para el desarrollo muscular.",
-    flavor: "Chocolate Deluxe",
-    price: 45.99,
-    image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=400&h=400&fit=crop",
-    images: [
-      "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=400&fit=crop"
-    ],
-    variants: [
-      { name: "Chocolate Deluxe", price: 45.99 },
-      { name: "Vainilla Supreme", price: 45.99 },
-      { name: "Fresa Explosiva", price: 47.99 }
-    ],
-    nutritionalValues: {
-      protein: "25g",
-      carbs: "3g",
-      fat: "1g",
-      calories: "120",
-    },
-    rating: 4.8,
-    reviewCount: reviews.length,
-    inStock: true
-  };
+  // Fetch producto individual desde tu API
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`http://localhost:3001/api/products/${id}`, {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setProduct(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching product:', err);
+        setError('Error al cargar el producto');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchProduct();
+    }
+  }, [id]);
 
   const renderStars = (rating) => {
     return [...Array(5)].map((_, i) => (
@@ -90,14 +101,6 @@ const Product = () => {
         ★
       </span>
     ));
-  };
-
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length);
   };
 
   const handleReviewSubmit = (e) => {
@@ -123,74 +126,123 @@ const Product = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="product-page">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Cargando producto...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <div className="product-page">
+        <div className="error-container">
+          <h2>❌ Error</h2>
+          <p>{error || 'Producto no encontrado'}</p>
+          <button 
+            className="retry-btn"
+            onClick={() => navigate('/products')}
+          >
+            Volver a Productos
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Crear imágenes múltiples si solo hay una
+  const images = product.image ? [product.image, product.image, product.image] : [
+    'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=400&h=400&fit=crop'
+  ];
+
   return (
     <div className="product-page">
       <div className="container">
+        {/* Botón de volver */}
+        <button className="back-button" onClick={() => navigate('/products')}>
+          ← Volver a Productos
+        </button>
 
         {/* Sección de imagen del producto */}
         <div className="image-box">
-          <img src={product.images[currentImageIndex]} alt={product.name} />
+          <img src={images[currentImageIndex]} alt={product.name} />
           <div className="image-gradient"></div>
-          <button onClick={prevImage} className="nav-button left">
-            ←
-          </button>
-          <button onClick={nextImage} className="nav-button right">
-            →
-          </button>
+          {images.length > 1 && (
+            <>
+              <button 
+                onClick={() => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)} 
+                className="nav-button left"
+              >
+                ←
+              </button>
+              <button 
+                onClick={() => setCurrentImageIndex((prev) => (prev + 1) % images.length)} 
+                className="nav-button right"
+              >
+                →
+              </button>
+            </>
+          )}
         </div>
 
         {/* Miniaturas */}
-        <div className="thumbnail-container">
-          {product.images.map((img, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentImageIndex(index)}
-              className={`thumbnail-button ${index === currentImageIndex ? 'active' : ''}`}
-            >
-              <img src={img} alt="" />
-            </button>
-          ))}
-        </div>
+        {images.length > 1 && (
+          <div className="thumbnail-container">
+            {images.map((img, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImageIndex(index)}
+                className={`thumbnail-button ${index === currentImageIndex ? 'active' : ''}`}
+              >
+                <img src={img} alt="" />
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Información del producto */}
         <h1 className="product-title">{product.name}</h1>
         <div className="rating">
-          {renderStars(product.rating)}
-          <span>({product.reviewCount} reseñas)</span>
-          <span className="stock-status">{product.inStock ? 'En Stock' : 'Agotado'}</span>
+          {renderStars(4.5)}
+          <span>({reviews.length} reseñas)</span>
+          <span className="stock-status">En Stock</span>
         </div>
         <p className="product-description">{product.description}</p>
 
         {/* Precio */}
         <div className="price-box">
-          <div className="price">${product.variants[selectedVariant].price}</div>
+          <div className="price">${product.price}</div>
           <div className="shipping">Envío gratis en pedidos mayores a $50</div>
         </div>
 
-        {/* Variantes */}
-        <div className="variant-label">Sabor</div>
-        <div className="variant-options">
-          {product.variants.map((variant, index) => (
-            <button
-              key={index}
-              onClick={() => setSelectedVariant(index)}
-              className={`variant-button ${selectedVariant === index ? 'active' : ''}`}
-            >
-              {variant.name}
-            </button>
-          ))}
-        </div>
+        {/* Sabor */}
+        {product.flavor && (
+          <>
+            <div className="variant-label">Sabor</div>
+            <div className="variant-options">
+              <button className="variant-button active">
+                {product.flavor}
+              </button>
+            </div>
+          </>
+        )}
 
         {/* Información nutricional */}
-        <div className="nutrition-box">
-          <div className="nutrition-label">Valores Nutricionales</div>
-          <div className="nutrition-grid">
-            <div>Proteína: <span>{product.nutritionalValues.protein}</span></div>
-            <div>Carbohidratos: <span>{product.nutritionalValues.carbs}</span></div>
-            <div>Grasa: <span>{product.nutritionalValues.fat}</span></div>
-            <div>Calorías: <span>{product.nutritionalValues.calories}</span></div>
+        {product.idNutritionalValues && (
+          <div className="nutrition-box">
+            <div className="nutrition-label">Valores Nutricionales</div>
+            <div className="nutrition-grid">
+              <div>Proteína: <span>{product.idNutritionalValues.protein}g</span></div>
+              <div>Carbohidratos: <span>{product.idNutritionalValues.carbs}g</span></div>
+              <div>Grasa: <span>{product.idNutritionalValues.fat || product.idNutritionalValues.fats}g</span></div>
+              <div>Calorías: <span>{product.idNutritionalValues.calories}</span></div>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Cantidad y botones */}
         <div className="actions">
@@ -200,7 +252,7 @@ const Product = () => {
             <button onClick={() => setQuantity(quantity + 1)} className="quantity-button">+</button>
           </div>
 
-          <button className="add-to-cart">
+          <button className="add-to-cart" onClick={() => alert(`Comprando ${quantity} unidad(es) de ${product.name}`)}>
             🛒 Agregar al Carrito
           </button>
 
@@ -307,4 +359,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Product2;
