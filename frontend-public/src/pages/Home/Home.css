@@ -4,6 +4,8 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
+   overflow-x: hidden; /* Muy importante para evitar barras de desplazamiento horizontal no deseadas */
+  box-sizing: border-box;
 }
 
 h2 {
@@ -18,9 +20,9 @@ h2 {
 }
 
 .banner-image {
-  width: 150%;
-  height: 90%;
-  object-fit: cover;
+  width: 100%; /* Asegura que la imagen no se desborde */
+  height: 100%; /* Asegura que la imagen llene el alto del contenedor */
+  object-fit: cover; /* Recorta la imagen para que llene el espacio sin distorsionar */
   display: block;
 }
 
@@ -227,6 +229,7 @@ h2 {
   flex-wrap: wrap;
   gap: 30px;
   max-width: 100%;
+  
 padding: 0 2rem;
 
 

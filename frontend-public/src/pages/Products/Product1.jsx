@@ -44,10 +44,7 @@ const Products1 = () => {
   };
 
   const handleBuyProduct = (product) => {
-    // Aquí puedes agregar la lógica de compra
-    // Por ejemplo, agregar al carrito o ir directamente al checkout
     alert(`Comprando: ${product.name} - $${product.price}`);
-    // navigate(`/checkout/${product._id}`);
   };
 
   if (loading) {
