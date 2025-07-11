@@ -20,7 +20,7 @@ function CartItem({ product }) {
             alt={product.title}
             className="img-fluid"
             style={{
-              width: "100%", // Se adapta al contenedor
+              width: "100%", // Se adapta al contenedordadas
               height: "200px", // Tamaño fijo
               objectFit: "cover", // Mantiene la proporción
               borderRadius: "10px", // Bordes redondeados para la imagen
