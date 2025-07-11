@@ -1,0 +1,169 @@
+/* FormularioTarjeta.css */
+* {
+  padding: 140px 20px 40px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  color: #333;
+  line-height: 1.4;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.card-display {
+  flex: 1 1 380px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 32px 40px 40px 40px;
+  color: #111;
+  position: relative;
+  min-height: 230px;
+}
+
+.chip {
+  width: 56px;
+  height: 40px;
+  background:
+    linear-gradient(135deg, #b8b8b8 40%, #e2e2e2 45%, #b8b8b8 50%, #e2e2e2 55%, #b8b8b8 60%),
+    linear-gradient(90deg, #a0a0a0 5px, transparent 6px),
+    linear-gradient(0deg, #d0d0d0 60%, #b0b0b0 70%);
+  background-blend-mode: overlay;
+  border-radius: 6px;
+  box-shadow:
+    inset 0 1px 2px rgba(255 255 255 / 0.6),
+    0 1px 5px rgba(0 0 0 / 0.15);
+  margin-bottom: 30px;
+}
+
+.card-number {
+  font-weight: 900;
+  font-size: 1.4rem;
+  letter-spacing: 3.5px;
+  margin-bottom: 24px;
+  font-family: 'Courier New', Courier, monospace;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.card-info-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+.card-subtext,
+.card-exp-month {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #777;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.filled {
+  opacity: 1 !important;
+  transform: scale(1.02);
+}
+
+.card-form {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 0.9rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #666;
+}
+
+input[type="text"] {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  color: #222;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #273052;
+  box-shadow: 0 0 5px #273052cc;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+}
+
+.row .input-group {
+  flex: 1;
+}
+
+button {
+  margin-top: 22px;
+  background-color: #182040;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 26px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #11182e;
+}
+
+@media (max-width: 700px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-display,
+  .card-form {
+    flex: 1 1 100%;
+    max-width: 400px;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+}
+

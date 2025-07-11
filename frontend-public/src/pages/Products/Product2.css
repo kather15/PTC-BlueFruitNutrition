@@ -1,0 +1,373 @@
+.product-page {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+  min-height: 100vh;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.15);
+  border: 2px solid #007bff;
+}
+
+/* Sección de imagen */
+.image-box {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+}
+
+.image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.image-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 123, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(0, 86, 179, 0.1) 100%
+  );
+  pointer-events: none;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #007bff;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-button:hover {
+  background: #007bff;
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-button.left {
+  left: 15px;
+}
+
+.nav-button.right {
+  right: 15px;
+}
+
+/* Miniaturas */
+.thumbnail-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.thumbnail-button {
+  border: 3px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: none;
+  padding: 0;
+}
+
+.thumbnail-button img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  display: block;
+}
+
+.thumbnail-button.active {
+  border-color: #007bff;
+  transform: scale(1.1);
+}
+
+.thumbnail-button:hover {
+  border-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Información del producto */
+.product-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #666;
+}
+
+.star-filled {
+  color: #ffc107;
+  font-size: 1.2rem;
+}
+
+.star-empty {
+  color: #e0e0e0;
+  font-size: 1.2rem;
+}
+
+.stock-status {
+  background: #28a745;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.product-description {
+  text-align: center;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+}
+
+/* Precio */
+.price-box {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border: 2px solid #007bff;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 5px;
+}
+
+.shipping {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Variantes */
+.variant-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.variant-options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.variant-button {
+  background: white;
+  border: 2px solid #007bff;
+  border-radius: 25px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  color: #007bff;
+}
+
+.variant-button:hover {
+  background: #f0f8ff;
+}
+
+.variant-button.active {
+  background: #007bff;
+  color: white;
+}
+
+/* Información nutricional */
+.nutrition-box {
+  background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+  border: 2px solid #28a745;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.nutrition-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #28a745;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  color: #555;
+}
+
+.nutrition-grid div {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.nutrition-grid span {
+  font-weight: bold;
+  color: #28a745;
+}
+
+/* Acciones */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 2px solid #007bff;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.quantity-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.quantity-button:hover {
+  background: #0056b3;
+}
+
+.quantity-display {
+  padding: 12px 20px;
+  font-weight: bold;
+  color: #007bff;
+  background: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+.add-to-cart {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-to-cart:hover {
+  background: linear-gradient(135deg, #20c997 0%, #28a745 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.review-button {
+  background: white;
+  color: #007bff;
+  border: 2px solid #007bff;
+  border-radius: 25px;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.review-button:hover {
+  background: #007bff;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .product-title {
+    font-size: 2rem;
+  }
+  
+  .price {
+    font-size: 2rem;
+  }
+  
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .add-to-cart,
+  .review-button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .variant-options {
+    justify-content: center;
+  }
+  
+  .nutrition-grid {
+    grid-template-columns: 1fr;
+  }
+}
