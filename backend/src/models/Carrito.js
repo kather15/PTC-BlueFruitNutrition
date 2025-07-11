@@ -1,3 +1,6 @@
+//id_product,total,quantityProducts 
+
+
 import { Schema, model } from "mongoose";
 
 const shoppingCartSchema = new Schema(
@@ -7,32 +10,15 @@ const shoppingCartSchema = new Schema(
       ref: 'product',
       required: true,
     },
-    id_categories: {
-      type: Schema.Types.ObjectId,
-      ref: 'categories',
-      required: true,
-    },
-    price: {
-      type: Number,
-      required: true,
-      min: 0,
-    },
-    quantity: {
-      type: Number,
-      required: true,
-      min: 1,
-      default: 1,
-    },
-    state: {
-      type: String,
-      required: true,
-      enum: ['active', 'purchased', 'cancelled'],
-      default: 'active'
-    },
     total: {
       type: Number,
       required: true,
       min: 0,
+    },
+     quantityProducts: {
+      type: Number,
+     
+      required: true,
     }
   },
   {

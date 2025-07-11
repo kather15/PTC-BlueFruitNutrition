@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/Nav/Nav';
 import Products from './pages/AddProducts/Products';
-import Suscripciones from './pages/Suscripciones/Suscripciones'; // Asegúrate de que esta ruta sea correcta
+import Suscripciones from './pages/Suscripcionees/Suscripcionees'; // Asegúrate de que esta ruta sea correcta
 import Products1 from '../src/pages/Products/Products1'; // Asegúrate de que esta ruta sea correcta
 import Footer from './components/Footer/Footer'; // asegúrate de tener esta ruta correcta
 import AuthProvider from './pages/Login/Login'; // Asegúrate de que esta ruta sea correcta
 import AddProduct from './pages/AddProducts/Products';
+import Ordenes from './pages/Ordenes/Ordenes';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/suscripciones" element={<Suscripciones />}/>
           <Route path="/login" element={<AuthProvider />}/>
           <Route path="/addProduct" element={<AddProduct />} />
+          <Route path="/ordenes" element={<Ordenes />} />
 
 
 
