@@ -1,78 +1,103 @@
-/* --- Global Styles --- */
-body {
-  font-family: Arial, sans-serif;
+/* HOME - VERSION LIMPIA SIN CONFLICTOS */
+
+
+
+.blue-fruit-home {
+  width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
-   overflow-x: hidden; /* Muy importante para evitar barras de desplazamiento horizontal no deseadas */
-  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-h2 {
-  text-align: center;
-}
-
-/* --- Banner --- */
-.banner-container {
+/* BANNER */
+.blue-fruit-banner-container {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
+  position: relative;
 }
 
-.banner-image {
-  width: 100%; /* Asegura que la imagen no se desborde */
-  height: 100%; /* Asegura que la imagen llene el alto del contenedor */
-  object-fit: cover; /* Recorta la imagen para que llene el espacio sin distorsionar */
+.blue-fruit-banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
+  margin: 0;
+  padding: 0;
 }
 
-/* --- Separador --- */
-.separador {
+/* SEPARADOR */
+.blue-fruit-separador {
   text-align: left;
   font-size: 0.9rem;
   font-weight: 500;
   padding: 1rem 2rem 0 2rem;
   color: #001a4d;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* --- Productos Scroll --- */
-.productos-scroll {
+/* TITULO */
+.blue-fruit-home h1 {
+  text-align: center;
+  color: #001a4d;
+  font-size: 2rem;
+  margin: 20px 0;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+/* PRODUCTOS SCROLL - MEDIDAS ORIGINALES */
+.blue-fruit-productos-scroll {
   display: flex;
   gap: 20px;
   padding: 1rem 2rem;
   overflow-x: auto;
   scroll-behavior: smooth;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
 }
 
-.productos-scroll::-webkit-scrollbar {
+.blue-fruit-productos-scroll::-webkit-scrollbar {
   display: none;
 }
 
-.product {
+.blue-fruit-product {
   width: 200px;
+  min-width: 200px;
   text-align: center;
   background-color: white;
   border-radius: 8px;
   padding: 10px;
   transition: transform 0.3s;
+  flex-shrink: 0;
+  margin: 0;
 }
 
-.product:hover {
+.blue-fruit-product:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
 
-.image-container {
+.blue-fruit-image-container {
   position: relative;
+  margin: 0;
+  padding: 0;
 }
 
-.image-container img {
+.blue-fruit-image-container img {
   width: 100%;
   border-radius: 8px;
   display: block;
+  margin: 0;
+  padding: 0;
 }
 
-.overlay {
+.blue-fruit-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -88,215 +113,398 @@ h2 {
   border-radius: 8px;
   pointer-events: none;
   transition: opacity 0.3s;
+  opacity: 0;
 }
 
-/* --- Botón Ver Todos --- */
-.boton-ver-todos-container {
+.blue-fruit-product:hover .blue-fruit-overlay {
+  opacity: 1;
+}
+
+.blue-fruit-product p {
+  margin: 0;
+  padding: 10px 0 0 0;
+  font-weight: normal;
+  color: #333;
+}
+
+/* BOTON VER TODOS */
+.blue-fruit-boton-ver-todos-container {
   text-align: center;
   margin: 2rem 0;
+  padding: 0 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.boton-ver-todos {
-  padding: 0.75rem 1.5rem;
+.blue-fruit-boton-ver-todos {
+  padding: 12px 24px;
   background-color: #001a4d;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* --- Separador Horizontal --- */
-.linea-separadora {
+.blue-fruit-boton-ver-todos:hover {
+  background-color: #003366;
+}
+
+/* LINEA SEPARADORA */
+.blue-fruit-linea-separadora {
   width: 80%;
+  max-width: 800px;
   margin: 30px auto;
   border: none;
-  border-top: 2px solid #ccc;
+  border-top: 2px solid #ddd;
+  display: block;
 }
 
-/* --- Historia --- */
-.historia {
+/* HISTORIA */
+.blue-fruit-historia {
   padding: 4rem 2rem;
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.blue-fruit-historia h2 {
+  color: #001a4d;
+  font-size: 2rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
-.historia-content {
+.blue-fruit-historia-content {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 3rem;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.historia-text {
+.blue-fruit-historia-text {
+  flex: 1;
+  min-width: 300px;
   max-width: 500px;
   text-align: left;
 }
 
-.historia-text ul {
+.blue-fruit-historia-text p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.blue-fruit-historia-text ul {
   margin-top: 1rem;
   list-style: disc;
-  padding-left: 1.2rem;
+  padding-left: 1.5rem;
+  color: #555;
 }
 
-.historia-content img {
-  width: 300px;
+.blue-fruit-historia-text li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.blue-fruit-historia-content img {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
   border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* --- Estadísticas --- */
-.estadisticas {
+/* ICONOS */
+.blue-fruit-iconos {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  padding: 3rem 2rem;
-  background: white;
-  flex-wrap: wrap;
-}
-
-.card {
-  background: #eee;
-  padding: 2rem;
-  text-align: center;
-  border-radius: 10px;
-  width: 150px;
-}
-
-.card.principal {
-  background: #001f4d;
-  color: white;
-  transform: scale(1.05);
-}
-
-/* --- Nuestro Equipo --- */
-.equipo {
+  gap: 3rem;
   padding: 4rem 2rem;
-  background-color: #f5f5f5;
+  background: white;
   text-align: center;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
 }
 
-.miembros {
+.blue-fruit-icono {
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  padding: 2rem;
+}
+
+.blue-fruit-icono img {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem auto;
+  display: block;
+}
+
+.blue-fruit-icono h2 {
+  color: #001a4d;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+.blue-fruit-icono p {
+  color: #666;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+/* EQUIPO */
+.blue-fruit-equipo {
+  padding: 4rem 2rem;
+  background-color: #f8f9fa;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.blue-fruit-equipo h2 {
+  color: #001a4d;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.blue-fruit-miembros {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  margin-top: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.miembro img {
-  width: 150px;
-  height: 150px;
+.blue-fruit-miembro {
+  text-align: center;
+  padding: 1rem;
+  min-width: 150px;
+}
+
+.blue-fruit-miembro img {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
+  margin: 0 auto 1rem auto;
+  display: block;
+  border: 4px solid #007bff;
 }
 
-/* --- Iconos --- */
-.iconos {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  padding: 3rem 2rem;
-  background: white;
-  text-align: center;
-}
-
-.icono i {
-  font-size: 2rem;
-  color: #001f4d;
+.blue-fruit-miembro h4 {
+  color: #001a4d;
+  font-size: 1.1rem;
   margin-bottom: 0.5rem;
 }
 
-/* --- Formulario de Contacto --- */
-.contact-section {
-  padding: 4rem 2rem;
-  background-color: #fffefe;
+.blue-fruit-miembro p {
+  color: #666;
+  font-size: 0.9rem;
 }
 
-.contact-section h2 {
+/* CONTACTO */
+.blue-fruit-contact-section {
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.blue-fruit-contact-section h2 {
   text-align: center;
-  color: #001f4d;
+  color: #001a4d;
   font-size: 2rem;
   margin-bottom: 2rem;
   font-weight: bold;
 }
 
-.contact-wrapper {
+.blue-fruit-contact-wrapper {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 30px;
-  max-width: 100%;
-  
-padding: 0 2rem;
-
-
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.contact-info {
-  background-color: #ffffff;
-  padding: 25px;
-  border-radius: 10px;
-  width: 300px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+.blue-fruit-contact-info {
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 300px;
+}
+
+.blue-fruit-contact-info h3 {
+  color: #001a4d;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.blue-fruit-contact-info p {
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
   font-size: 0.95rem;
 }
 
-.contact-info strong {
-  color: #001f4d;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.contact-info hr {
+.blue-fruit-contact-info hr {
   margin: 1.5rem 0;
   border: 0;
   height: 1px;
-  background: #ffffff;
-    max-width: 600px
+  background: #dee2e6;
 }
 
-.contact-form {
-  background-color: #ffffff;
-  padding: 25px;
-  border-radius: 10px;
-  width: 600px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.contact-form input,
-.contact-form textarea {
+.blue-fruit-contact-form {
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 12px;
   width: 100%;
-  padding: 12px;
+  max-width: 500px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 300px;
+}
+
+.blue-fruit-contact-form input,
+.blue-fruit-contact-form textarea {
+  width: 100%;
+  padding: 12px 15px;
   margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
   font-size: 0.95rem;
-  background-color: #fffcfc;
+  background-color: #ffffff;
   color: #333;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
+.blue-fruit-contact-form input:focus,
+.blue-fruit-contact-form textarea:focus {
   outline: none;
-  border-color: #999;
-  background-color: #fff;
+  border-color: #007bff;
 }
 
-.contact-form button {
-  background-color: #001f4d;
+.blue-fruit-contact-form button {
+  background-color: #001a4d;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
+  font-weight: 600;
   float: right;
   transition: background-color 0.3s;
 }
 
-.contact-form button:hover {
+.blue-fruit-contact-form button:hover {
   background-color: #003366;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .blue-fruit-historia-content {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .blue-fruit-historia-text {
+    text-align: center;
+  }
+  
+  .blue-fruit-iconos {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .blue-fruit-icono {
+    min-width: auto;
+    max-width: 100%;
+  }
+  
+  .blue-fruit-miembros {
+    gap: 1.5rem;
+  }
+  
+  .blue-fruit-contact-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .blue-fruit-contact-info,
+  .blue-fruit-contact-form {
+    max-width: 100%;
+  }
+  
+  .blue-fruit-separador,
+  .blue-fruit-home h1 {
+    padding: 1rem 20px;
+  }
+  
+  .blue-fruit-produtos-scroll {
+    padding: 1rem 20px;
+  }
+  
+  .blue-fruit-historia,
+  .blue-fruit-equipo,
+  .blue-fruit-contact-section {
+    padding: 3rem 20px;
+  }
+  
+  .blue-fruit-iconos {
+    padding: 3rem 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .blue-fruit-product {
+    min-width: 160px;
+    width: 160px;
+    padding: 10px;
+  }
+  
+  .blue-fruit-image-container img {
+    height: 120px;
+    object-fit: cover;
+  }
+  
+  .blue-fruit-historia h2,
+  .blue-fruit-equipo h2,
+  .blue-fruit-contact-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .blue-fruit-home h1 {
+    font-size: 1.5rem;
+  }
+  
+  .blue-fruit-historia,
+  .blue-fruit-equipo,
+  .blue-fruit-contact-section,
+  .blue-fruit-iconos {
+    padding: 2rem 15px;
+  }
 }

@@ -8,37 +8,29 @@ const Product2 = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviews, setReviews] = useState([
     {
       id: 1,
-      user: "María González",
+      user: "Rodrigo Torres",
       rating: 5,
-      comment: "¡Excelente producto! El sabor es increíble y se mezcla muy bien. La recomiendo 100%.",
+      comment: "Reppo es un Gel energético de 'recuperación' específico que combina la sacarosa y fructosa con aminoácidos de cadena ramificada (BCAA) y vitamina C. Esta formulado para contribuir con la reconstrucción de las fibras musculares post-ejercicio. De esta manera colabora en evitar el catabolismo muscular, y así mejorando el rendimiento.",
       date: "15 Nov 2024"
     },
     {
       id: 2,
-      user: "Carlos López",
+      user: "David Zepeda",
       rating: 4,
-      comment: "Muy buena calidad, aunque me gustaría que tuviera más variedad de sabores. El precio está bien.",
+      comment: "Reppo es un Gel energético de 'recuperación' específico que combina la sacarosa y fructosa con aminoácidos de cadena ramificada (BCAA) y vitamina C. Esta formulado para contribuir con la reconstrucción de las fibras musculares post-ejercicio. De esta manera colabora en evitar el catabolismo muscular, y así mejorando el rendimiento.",
       date: "10 Nov 2024"
     },
     {
       id: 3,
-      user: "Ana Martínez",
+      user: "Olga Flores",
       rating: 5,
-      comment: "Perfecta para mis entrenamientos. Se disuelve completamente y no deja sabor residual desagradable.",
+      comment: "Reppo es un Gel energético de 'recuperación' específico que combina la sacarosa y fructosa con aminoácidos de cadena ramificada (BCAA) y vitamina C. Esta formulado para contribuir con la reconstrucción de las fibras musculares post-ejercicio. De esta manera colabora en evitar el catabolismo muscular, y así mejorando el rendimiento.",
       date: "8 Nov 2024"
-    },
-    {
-      id: 4,
-      user: "Roberto Silva",
-      rating: 3,
-      comment: "Está bien, pero esperaba un poco más de cremosidad. El envío fue rápido.",
-      date: "5 Nov 2024"
     }
   ]);
   const [newReview, setNewReview] = useState({
@@ -52,7 +44,7 @@ const Product2 = () => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:3001/api/products/${id}`, {
+        const response = await fetch(`http://localhost:4000/api/products/${id}`, {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -69,7 +61,22 @@ const Product2 = () => {
         setError(null);
       } catch (err) {
         console.error('Error fetching product:', err);
-        setError('Error al cargar el producto');
+        // Para demostración, usar datos de ejemplo si hay error
+        setProduct({
+          _id: id,
+          name: "Reppo",
+          price: "2.50",
+          flavor: "Mango",
+          description: "Reppo es un Gel energético de 'recuperación' específico que combina la sacarosa y fructosa con aminoácidos de cadena ramificada (BCAA) y vitamina C. Esta formulado para contribuir con la reconstrucción de las fibras musculares post-ejercicio. De esta manera colabora en evitar el catabolismo muscular, y así mejorando el rendimiento.",
+          image: "/image 3.png",
+          idNutritionalValues: {
+            protein: 5,
+            carbs: 25,
+            fat: 0,
+            calories: 120
+          }
+        });
+        setError(null);
       } finally {
         setLoading(false);
       }
@@ -84,7 +91,7 @@ const Product2 = () => {
     return [...Array(5)].map((_, i) => (
       <span
         key={i}
-        className={i < Math.floor(rating) ? 'star-filled' : 'star-empty'}
+        className={`star ${i < Math.floor(rating) ? 'filled' : 'empty'}`}
       >
         ★
       </span>
@@ -154,11 +161,6 @@ const Product2 = () => {
     );
   }
 
-  // Crear imágenes múltiples si solo hay una
-  const images = product.image ? [product.image, product.image, product.image] : [
-    'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=400&h=400&fit=crop'
-  ];
-
   return (
     <div className="product-page">
       <div className="container">
@@ -167,101 +169,89 @@ const Product2 = () => {
           ← Volver a Productos
         </button>
 
-        {/* Sección de imagen del producto */}
-        <div className="image-box">
-          <img src={images[currentImageIndex]} alt={product.name} />
-          <div className="image-gradient"></div>
-          {images.length > 1 && (
-            <>
-              <button 
-                onClick={() => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)} 
-                className="nav-button left"
-              >
-                ←
-              </button>
-              <button 
-                onClick={() => setCurrentImageIndex((prev) => (prev + 1) % images.length)} 
-                className="nav-button right"
-              >
-                →
-              </button>
-            </>
-          )}
-        </div>
-
-        {/* Miniaturas */}
-        {images.length > 1 && (
-          <div className="thumbnail-container">
-            {images.map((img, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentImageIndex(index)}
-                className={`thumbnail-button ${index === currentImageIndex ? 'active' : ''}`}
-              >
-                <img src={img} alt="" />
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Información del producto */}
-        <h1 className="product-title">{product.name}</h1>
-        <div className="rating">
-          {renderStars(4.5)}
-          <span>({reviews.length} reseñas)</span>
-          <span className="stock-status">En Stock</span>
-        </div>
-        <p className="product-description">{product.description}</p>
-
-        {/* Precio */}
-        <div className="price-box">
-          <div className="price">${product.price}</div>
-          <div className="shipping">Envío gratis en pedidos mayores a $50</div>
-        </div>
-
-        {/* Sabor */}
-        {product.flavor && (
-          <>
-            <div className="variant-label">Sabor</div>
-            <div className="variant-options">
-              <button className="variant-button active">
-                {product.flavor}
-              </button>
-            </div>
-          </>
-        )}
-
-        {/* Información nutricional */}
-        {product.idNutritionalValues && (
-          <div className="nutrition-box">
-            <div className="nutrition-label">Valores Nutricionales</div>
-            <div className="nutrition-grid">
-              <div>Proteína: <span>{product.idNutritionalValues.protein}g</span></div>
-              <div>Carbohidratos: <span>{product.idNutritionalValues.carbs}g</span></div>
-              <div>Grasa: <span>{product.idNutritionalValues.fat || product.idNutritionalValues.fats}g</span></div>
-              <div>Calorías: <span>{product.idNutritionalValues.calories}</span></div>
+        {/* Layout principal de dos columnas */}
+        <div className="product-main">
+          {/* Sección de imagen izquierda */}
+          <div className="product-image-section">
+            <div className="product-image-container">
+              <img 
+                src={product.image || '/placeholder-product.png'} 
+                alt={product.name}
+                className="product-image"
+                onError={(e) => {
+                  e.target.src = '/placeholder-product.png';
+                }}
+              />
             </div>
           </div>
-        )}
 
-        {/* Cantidad y botones */}
-        <div className="actions">
-          <div className="quantity-control">
-            <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="quantity-button">-</button>
-            <div className="quantity-display">{quantity}</div>
-            <button onClick={() => setQuantity(quantity + 1)} className="quantity-button">+</button>
+          {/* Sección de información derecha */}
+          <div className="product-info-section">
+            <div className="product-header">
+              <h1 className="product-title">{product.name}</h1>
+              <div className="product-price">${product.price}</div>
+              
+              {product.flavor && (
+                <div className="product-flavor">Sabor: {product.flavor}</div>
+              )}
+              
+              <p className="product-description">{product.description}</p>
+            </div>
+
+            {/* Información nutricional */}
+            {product.idNutritionalValues && (
+              <div className="nutrition-info">
+                <div className="nutrition-title">Información Nutricional</div>
+                <div className="nutrition-grid">
+                  <div className="nutrition-item">
+                    Proteína: <span className="value">{product.idNutritionalValues.protein}g</span>
+                  </div>
+                  <div className="nutrition-item">
+                    Carbohidratos: <span className="value">{product.idNutritionalValues.carbs}g</span>
+                  </div>
+                  <div className="nutrition-item">
+                    Grasa: <span className="value">{product.idNutritionalValues.fat || product.idNutritionalValues.fats || 0}g</span>
+                  </div>
+                  <div className="nutrition-item">
+                    Calorías: <span className="value">{product.idNutritionalValues.calories}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Controles de cantidad y botones */}
+            <div className="product-actions">
+              <div className="quantity-control">
+                <button 
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))} 
+                  className="quantity-button"
+                >
+                  -
+                </button>
+                <div className="quantity-display">{quantity}</div>
+                <button 
+                  onClick={() => setQuantity(quantity + 1)} 
+                  className="quantity-button"
+                >
+                  +
+                </button>
+              </div>
+
+              <button 
+                className="add-to-cart" 
+                onClick={() => alert(`Agregando ${quantity} unidad(es) de ${product.name} al carrito`)}
+              >
+                Agregar al Carrito
+              </button>
+            </div>
+
+            <button 
+              className="review-button"
+              onClick={() => setShowReviewForm(!showReviewForm)}
+            >
+              {showReviewForm ? 'Cancelar Reseña' : 'Personalizar Producto'}
+            </button>
           </div>
-
-          <button className="add-to-cart" onClick={() => alert(`Comprando ${quantity} unidad(es) de ${product.name}`)}>
-            🛒 Agregar al Carrito
-          </button>
-
-          <button 
-            className="review-button"
-            onClick={() => setShowReviewForm(!showReviewForm)}
-          >
-            {showReviewForm ? 'Cancelar Reseña' : 'Escribir Reseña'}
-          </button>
         </div>
 
         {/* Formulario de reseña */}
@@ -319,25 +309,31 @@ const Product2 = () => {
 
         {/* Sección de reseñas */}
         <div className="reviews-section">
-          <h2 className="reviews-title">
-            Reseñas de Clientes ({reviews.length})
-          </h2>
+          <div className="reviews-header">
+            <h2 className="reviews-title">Reseñas</h2>
+            <button 
+              className="add-review-button"
+              onClick={() => setShowReviewForm(!showReviewForm)}
+            >
+              Agregar Reseña
+            </button>
+          </div>
           
-          <div className="reviews-container">
+          <div className="reviews-grid">
             {reviews.length === 0 ? (
               <div className="no-reviews">
                 <p>Aún no hay reseñas. ¡Sé el primero en escribir una!</p>
               </div>
             ) : (
               reviews.map((review) => (
-                <div key={review.id} className="review-item">
+                <div key={review.id} className="review-card">
                   <div className="review-header">
-                    <div className="review-user">
-                      <div className="user-avatar">
+                    <div className="reviewer-info">
+                      <div className="reviewer-avatar">
                         {review.user.charAt(0).toUpperCase()}
                       </div>
-                      <div className="user-info">
-                        <div className="user-name">{review.user}</div>
+                      <div className="reviewer-details">
+                        <div className="reviewer-name">{review.user}</div>
                         <div className="review-date">{review.date}</div>
                       </div>
                     </div>

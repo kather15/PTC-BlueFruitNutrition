@@ -1,13 +1,18 @@
-.footer {
-  width: 100vw;
+/* FOOTER - VERSION LIMPIA SIN CONFLICTOS */
+
+.blue-fruit-footer {
+  width: 100%;
   background-color: #0C133F;
   color: #ffffff;
   padding: 40px;
   font-family: 'Outfit', sans-serif;
   box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  z-index: 100;
 }
 
-.footer-top {
+.blue-fruit-footer-top {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -18,45 +23,45 @@
   margin-right: auto;
 }
 
-.footer-section {
+.blue-fruit-footer-section {
   flex: 1;
   min-width: 200px;
 }
 
-.logo-section {
+.blue-fruit-logo-section {
   max-width: 280px;
 }
 
-.footer-logo {
-  height: 100px; /* Logo más grande implementado */
+.blue-fruit-footer-logo {
+  height: 100px;
   margin-bottom: 15px;
 }
 
-.subscribe-title {
+.blue-fruit-subscribe-title {
   font-weight: 600;
   margin-bottom: 5px;
 }
 
-.subscribe-text {
+.blue-fruit-subscribe-text {
   font-size: 14px;
   margin-bottom: 10px;
 }
 
-.subscribe-input {
+.blue-fruit-subscribe-input {
   display: flex;
   border: 1px solid #ccc;
   border-radius: 4px;
   overflow: hidden;
 }
 
-.subscribe-input input {
+.blue-fruit-subscribe-input input {
   padding: 10px;
   flex: 1;
   border: none;
   outline: none;
 }
 
-.subscribe-input button {
+.blue-fruit-subscribe-input button {
   padding: 0 15px;
   background-color: #ffffff;
   color: #0C133F;
@@ -65,22 +70,53 @@
   cursor: pointer;
 }
 
-.footer-section h4 {
+.blue-fruit-footer-section h4 {
   font-size: 16px;
   margin-bottom: 10px;
 }
 
-.footer-section p {
+.blue-fruit-footer-section p {
   font-size: 14px;
   margin: 6px 0;
 }
 
-.footer-bottom {
+.blue-fruit-footer-bottom {
   text-align: center;
   border-top: 1px solid #1a1f54;
   padding-top: 20px;
+  padding-bottom: 0;
+  margin-bottom: 0;
   font-size: 13px;
   color: #ccc;
   max-width: 1200px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .blue-fruit-footer {
+    padding: 30px 20px 20px 20px;
+  }
+  
+  .blue-fruit-footer-top {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .blue-fruit-footer-bottom {
+    padding-top: 15px;
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .blue-fruit-footer {
+    padding: 20px 15px 15px 15px;
+  }
+  
+  .blue-fruit-footer-bottom {
+    padding-top: 10px;
+    padding-bottom: 0;
+  }
 }
