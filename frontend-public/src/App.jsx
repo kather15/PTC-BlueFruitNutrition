@@ -5,12 +5,16 @@ import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Pay from "./pages/Pay/pay";
+
 import Products from "./pages/Products/Product2";
 
 
 function App() {
+
+
   return (
     <>
+    
       <Nav />
         
       <Routes>

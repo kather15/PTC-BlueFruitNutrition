@@ -1,81 +1,168 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import './pay.css';
 
-const FormularioTarjeta = () => {
-  const [numero, setNumero] = useState('');
-  const [titular, setTitular] = useState('');
-  const [vencimiento, setVencimiento] = useState('');
+const Pay = () => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    watch,
+  } = useForm({
+    defaultValues: {
+      cardNumber: '',
+      cardHolder: '',
+      expiryDate: '',
+      securityCode: ''
+    }
+  });
+
+  const onSubmitFront = (data) => {
+    // Validación adicional si quieres, y mostrar parte trasera
+    setShowBack(true);
+  };
+
+  const [showBack, setShowBack] = React.useState(false);
+
+  // Maneja el formateo automático de MM/AA en expiryDate
+  const handleExpiryInput = (e) => {
+    let rawValue = e.target.value.replace(/\D/g, ''); // solo números
+
+    if (rawValue.length >= 3) {
+      rawValue = rawValue.slice(0, 2) + '/' + rawValue.slice(2, 4);
+    }
+
+    if (rawValue.length > 5) {
+      rawValue = rawValue.slice(0, 5);
+    }
+
+    setValue('expiryDate', rawValue);
+  };
+
+  // Maneja el submit de la parte trasera (seguridad)
+  const onSubmitBack = (data) => {
+    alert('Compra finalizada con éxito');
+  };
 
   return (
-    <main className="container" role="main" aria-label="Formulario de tarjeta de crédito">
-      <section className="card-display" aria-label="Tarjeta de crédito simulada">
-        <div className="chip" aria-hidden="true"></div>
-        <div className={`card-number ${numero ? 'filled' : ''}`}>
-          {numero || '1234 5678 9010 1234'}
-        </div>
-        <div className="card-info">
-          <div className="card-info-left">
-            <div className="card-label">Titular de la Tarjeta:</div>
-            <div className={`card-subtext ${titular ? 'filled' : ''}`}>
-              {titular || 'Blue Fruit Nutrition'}
+     <div className="page-wrapper">
+    <div className="credit-card-container">
+      <div className={`card-flip-wrapper ${showBack ? 'flip' : ''}`}>
+        <div className="credit-card-mockup front">
+          <div className="chip"></div>
+          <div className="card-number">{watch('cardNumber') || '1234 5678 9010 1234'}</div>
+          <div className="card-info-bottom">
+            <div className="card-holder-info">
+              <span className="card-label">Titular de la Tarjeta:</span>
+              <span className="card-value">{watch('cardHolder') || 'Blue Fruit Nutrition'}</span>
             </div>
-          </div>
-          <div className="card-expiration">
-            <div className="card-label">Fecha de Vencimiento:</div>
-            <div className={`card-exp-month ${vencimiento ? 'filled' : ''}`}>
-              {vencimiento || '10/2025'}
+            <div className="expiration-info">
+              <span className="card-label">Fecha de Vencimiento:</span>
+              <span className="card-value">{watch('expiryDate') || '10/25'}</span>
             </div>
           </div>
         </div>
-      </section>
 
-      <form
-        className="card-form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          alert('Siguiente paso');
-        }}
-      >
-        <div className="input-group">
-          <label htmlFor="cardNumber">Número de Tarjeta</label>
-          <input
-            type="text"
-            id="cardNumber"
-            placeholder="1234 5678 9010 1234"
-            maxLength={19}
-            value={numero}
-            onChange={(e) => setNumero(e.target.value)}
-          />
-        </div>
-        <div className="row">
-          <div className="input-group">
-            <label htmlFor="cardHolder">Titular de la Tarjeta:</label>
-            <input
-              type="text"
-              id="cardHolder"
-              placeholder="Nombre completo"
-              value={titular}
-              onChange={(e) => setTitular(e.target.value)}
-            />
+        <div className="credit-card-mockup back">
+          <div className="magnetic-stripe"></div>
+          <div className="card-holder-back-info">
+            <span className="card-label-back">Titular de la Tarjeta:</span>
+            <span className="card-value-back">{watch('cardHolder') || 'Blue Fruit Nutrition'}</span>
           </div>
-          <div className="input-group">
-            <label htmlFor="expiryDate">Fecha de Vencimiento:</label>
-            <input
-              type="text"
-              id="expiryDate"
-              placeholder="MM/AAAA"
-              maxLength={7}
-              value={vencimiento}
-              onChange={(e) => setVencimiento(e.target.value)}
-            />
-          </div>
+          <div className="security-code-label">Números de seguridad:</div>
+          <div className="security-code-display">{watch('securityCode') || '***'}</div>
         </div>
-        <button type="submit">Siguiente Paso</button>
-      </form>
-    </main>
+      </div>
+
+      {!showBack ? (
+        <form className="input-fields-group" onSubmit={handleSubmit(onSubmitFront)}>
+          <div className="input-field">
+            <label htmlFor="cardNumber">Número de Tarjeta</label>
+            <input
+              id="cardNumber"
+              maxLength={16}
+              {...register('cardNumber', {
+                required: 'Número de tarjeta requerido',
+                pattern: {
+                  value: /^\d{16}$/,
+                  message: 'El número de tarjeta debe tener 16 dígitos'
+                }
+              })}
+            />
+            {errors.cardNumber && <small className="error">{errors.cardNumber.message}</small>}
+          </div>
+
+          <div className="flex-group">
+            <div className="input-field half-width">
+              <label htmlFor="cardHolder">Titular de la Tarjeta:</label>
+              <input
+                id="cardHolder"
+                {...register('cardHolder', {
+                  required: 'Titular es requerido',
+                  minLength: {
+                    value: 3,
+                    message: 'Nombre demasiado corto'
+                  }
+                })}
+              />
+              {errors.cardHolder && <small className="error">{errors.cardHolder.message}</small>}
+            </div>
+
+            <div className="input-field half-width">
+              <label htmlFor="expiryDate">Fecha de Vencimiento:</label>
+              <input
+                id="expiryDate"
+                placeholder="MM/AA"
+                maxLength={5}
+                {...register('expiryDate', {
+                  required: 'Fecha de vencimiento requerida',
+                  pattern: {
+                    value: /^(0[1-9]|1[0-2])\/\d{2}$/,
+                    message: 'Formato inválido (MM/AA)'
+                  }
+                })}
+                onChange={handleExpiryInput}
+              />
+              {errors.expiryDate && <small className="error">{errors.expiryDate.message}</small>}
+            </div>
+          </div>
+
+          <button type="submit" className="next-step-button">Siguiente Paso</button>
+        </form>
+      ) : (
+        <form className="input-fields-group security-code-group" onSubmit={handleSubmit(onSubmitBack)}>
+          <button
+            type="button"
+            className="back-button"
+            onClick={() => setShowBack(false)}
+            style={{ marginBottom: '1rem' }}
+          >
+            ← Volver
+          </button>
+
+          <div className="input-field full-width">
+            <label htmlFor="securityCode">Números de seguridad</label>
+            <input
+              id="securityCode"
+              maxLength={3}
+              {...register('securityCode', {
+                required: 'Código de seguridad requerido',
+                pattern: {
+                  value: /^\d{3}$/,
+                  message: 'Debe tener 3 dígitos'
+                }
+              })}
+            />
+            {errors.securityCode && <small className="error">{errors.securityCode.message}</small>}
+          </div>
+
+          <button type="submit" className="finish-purchase-button">Finalizar Compra</button>
+        </form>
+      )}
+    </div>
+    </div>
   );
 };
 
-export default FormularioTarjeta;
-
-
+export default Pay;
