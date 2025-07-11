@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Agrega este import
+import { useNavigate } from "react-router-dom";
 import "./Products1.css";
+import CartItem from "../../components/CardProducts/CardProducts"; // Asegúrate de que la ruta sea correcta
 
 const API_URL = "http://localhost:4000/api/products";
 
@@ -16,7 +17,7 @@ function ProductManager() {
     image: null,
   });
   const [showEditModal, setShowEditModal] = useState(false);
-  const navigate = useNavigate(); // Hook para navegación
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProducts();
@@ -98,40 +99,26 @@ function ProductManager() {
   };
 
   return (
-    <div>
-      <h2>Editar / Eliminar Productos</h2>
+    <div className="products-container">
+      <h2 className="products-title">Productos</h2>
       <button
         className="add-product-btn"
         onClick={() => navigate("/addProduct")}
-        style={{ marginBottom: "20px" }}
       >
         Agregar Producto
       </button>
-      {products.length > 0 ? (
-        <ul className="product-list">
-          {products.map((p) => (
-            <li key={p._id} className="product-item">
-              <img
-                src={p.image || "/producticon.png"}
-                alt="producto"
-                className="thumb"
-              />
-              <div>
-                <strong>{p.name}</strong> - {p.flavor} - ${p.price}
-                <p>{p.description}</p>
-              </div>
-              <div className="actions">
-                <button onClick={() => openEditModal(p)}>Editar</button>
-                <button onClick={() => handleDelete(p._id)}>Eliminar</button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No hay productos para mostrar.</p>
-      )}
 
-      {/* Modal edición */}
+      <div className="product-grid">
+        {products.map((p) => (
+          <CartItem
+            key={p._id}
+            product={p}
+            onEdit={openEditModal}
+            onDelete={handleDelete}
+          />
+        ))}
+      </div>
+
       {showEditModal && (
         <div className="modal-backdrop">
           <div className="modal-content">

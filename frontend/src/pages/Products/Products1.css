@@ -16,69 +16,93 @@ body {
   padding: 0;
 }
 
-.product-list {
-  margin-top: 3rem;
-  width: 100%;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
+/* NUEVO ESTILO PARA CARDS */
 
-.product-list h2 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color: var(--primary);
+.products-container {
+  padding: 40px 20px;
   text-align: center;
 }
 
-.product-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--accent);
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+.products-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #0f0f1c;
 }
 
-.product-item img.thumb {
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-image {
   width: 100px;
-  height: 100px;
-  object-fit: contain;
-  margin-right: 1rem;
-  border-radius: var(--radius);
+  height: auto;
+  margin-bottom: 1rem;
 }
 
-.product-item > div {
-  flex: 1;
-  margin-left: 1rem;
-  color: #000; /* fuerza texto negro */
+.product-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 1rem;
 }
 
-.product-item .actions {
+.product-buttons {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.product-item .actions button {
-  padding: 0.4rem 0.8rem;
+.edit-btn,
+.delete-btn,
+.add-product-btn {
+  background-color: #0f0f1c;
+  color: white;
+  padding: 0.5rem 1rem;
   border: none;
-  border-radius: var(--radius);
-  background-color: var(--primary);
-  color: var(--button-text);
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.9rem;
   transition: background-color 0.3s ease;
+  font-weight: 500;
 }
 
-.product-item .actions button:hover {
+.delete-btn {
+  background-color: #002244;
+}
+
+.edit-btn:hover {
   background-color: #1c1c2a;
 }
 
-/* Modal */
+.delete-btn:hover {
+  background-color: #223355;
+}
+
+.add-product-btn {
+  margin-bottom: 30px;
+}
+
+/* MODAL */
 
 .modal-backdrop {
   position: fixed;
