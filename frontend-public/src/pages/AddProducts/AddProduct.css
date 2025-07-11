@@ -16,24 +16,6 @@ body {
   padding: 0;
 }
 
-.main-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-  background-color: #f9f9f9;
-}
-
-.title {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-  color: var(--primary);
-}
-
-/* ---------------- FORMULARIO ---------------- */
-
 .card-form {
   background: var(--accent);
   display: flex;
@@ -47,6 +29,7 @@ body {
   max-width: 900px;
   width: 100%;
   box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .form-left {
@@ -131,66 +114,5 @@ body {
 
 .clear-btn:hover,
 .submit-btn:hover {
-  background-color: #1c1c2a;
-}
-
-/* ---------------- LISTA DE PRODUCTOS ---------------- */
-
-.product-list {
-  margin-top: 3rem;
-  width: 100%;
-  max-width: 900px;
-}
-
-.product-list h3 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color: var(--primary);
-}
-
-.product-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #ffffff;
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.product-item img.thumb {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  margin-right: 1rem;
-  border-radius: var(--radius);
-}
-
-.product-item > div {
-  flex: 1;
-  margin-left: 1rem;
-  color: #000; /* Fuerza el texto a negro */
-}
-
-.product-item .actions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.product-item .actions button {
-  padding: 0.4rem 0.8rem;
-  border: none;
-  border-radius: var(--radius);
-  background-color: var(--primary);
-  color: var(--button-text);
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
-}
-
-.product-item .actions button:hover {
   background-color: #1c1c2a;
 }

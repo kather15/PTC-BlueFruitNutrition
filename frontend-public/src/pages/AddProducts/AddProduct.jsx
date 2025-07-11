@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import "./Products1.css";
+import React, { useState } from "react";
+import "./AddProduct.css";
 
-const API_URL = "http://localhost:4000/api/products"; // Cambia si usás otra base URL
+const API_URL = "http://localhost:4000/api/products";
 
-function ProductManager() {
+function ProductInsert({ onAdded }) {
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -12,19 +12,6 @@ function ProductManager() {
     idNutritionalValues: "",
     image: null,
   });
-
-  const [products, setProducts] = useState([]);
-  const [editingId, setEditingId] = useState(null);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    const res = await fetch(API_URL);
-    const data = await res.json();
-    setProducts(data);
-  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -43,7 +30,6 @@ function ProductManager() {
       idNutritionalValues: "",
       image: null,
     });
-    setEditingId(null);
   };
 
   const handleSubmit = async (e) => {
@@ -55,50 +41,26 @@ function ProductManager() {
     }
 
     try {
-      const res = await fetch(
-        editingId ? `${API_URL}/${editingId}` : API_URL,
-        {
-          method: editingId ? "PUT" : "POST",
-          body: formData,
-        }
-      );
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: formData,
+      });
 
       if (res.ok) {
-        await fetchProducts();
+        onAdded();
         handleReset();
+        alert("Producto agregado correctamente");
       } else {
-        alert("Error al guardar el producto.");
+        alert("Error al agregar el producto.");
       }
     } catch (err) {
       console.error("Error al enviar:", err);
     }
   };
 
-  const handleEdit = (product) => {
-    setForm({
-      name: product.name,
-      description: product.description,
-      flavor: product.flavor,
-      price: product.price,
-      idNutritionalValues: product.idNutritionalValues || "",
-      image: null,
-    });
-    setEditingId(product._id);
-  };
-
-  const handleDelete = async (id) => {
-    if (confirm("¿Estás seguro de eliminar este producto?")) {
-      await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-      await fetchProducts();
-    }
-  };
-
   return (
-    <div className="main-container">
-      <h2 className="title">
-        {editingId ? "Editar Producto" : "Añadir un nuevo Producto"}
-      </h2>
-
+    <div>
+      <h2>Añadir un nuevo Producto</h2>
       <div className="card-form">
         <div className="form-left">
           <div className="image-preview">
@@ -110,12 +72,12 @@ function ProductManager() {
           </div>
           <input
             type="file"
-            id="imageUpload"
+            id="imageUploadInsert"
             accept="image/*"
             onChange={handleImageChange}
             hidden
           />
-          <label htmlFor="imageUpload" className="upload-btn">
+          <label htmlFor="imageUploadInsert" className="upload-btn">
             Subir Imagen
           </label>
         </div>
@@ -127,6 +89,7 @@ function ProductManager() {
             placeholder="Nombre:"
             value={form.name}
             onChange={handleChange}
+            required
           />
           <textarea
             name="description"
@@ -134,6 +97,7 @@ function ProductManager() {
             value={form.description}
             onChange={handleChange}
             rows="4"
+            required
           />
           <div className="row-fields">
             <input
@@ -142,6 +106,7 @@ function ProductManager() {
               placeholder="Sabor:"
               value={form.flavor}
               onChange={handleChange}
+              required
             />
             <input
               type="text"
@@ -149,6 +114,7 @@ function ProductManager() {
               placeholder="Precio:"
               value={form.price}
               onChange={handleChange}
+              required
             />
           </div>
           <input
@@ -159,43 +125,21 @@ function ProductManager() {
             onChange={handleChange}
           />
           <div className="form-buttons">
-            <button type="button" onClick={handleReset} className="clear-btn">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="clear-btn"
+            >
               Limpiar
             </button>
             <button type="submit" className="submit-btn">
-              {editingId ? "Actualizar" : "Agregar"}
+              Agregar
             </button>
           </div>
         </form>
       </div>
-
-      {/* Lista */}
-      {products.length > 0 && (
-        <div className="product-list">
-          <h3>Productos</h3>
-          <ul>
-            {products.map((p) => (
-              <li key={p._id} className="product-item">
-                <img
-                  src={p.image || "/producticon.png"}
-                  alt="producto"
-                  className="thumb"
-                />
-                <div>
-                  <strong>{p.name}</strong> - {p.flavor} - ${p.price}
-                  <p>{p.description}</p>
-                </div>
-                <div className="actions">
-                  <button onClick={() => handleEdit(p)}>Editar</button>
-                  <button onClick={() => handleDelete(p._id)}>Eliminar</button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 }
 
-export default ProductManager;
+export default ProductInsert;

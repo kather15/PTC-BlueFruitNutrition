@@ -1,66 +1,92 @@
-import React, { useEffect, useState } from "react";
-import {Toaster, toast} from "react-hot-toast";
-import { useNavigate, Navigate } from "react-router-dom";
-//import { FaUser, FaLock } from "react-icons/fa";
-import { useAuth } from "../../context/useAuth";
-//import "./Login.css"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import axios from "axios";
+import "./Login.css";
+import triathlonImage from "../../assets/imgregister.png"; // Asegúrate de que la ruta sea correcta
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { user, Login, logout, authCokie, setAuthCokie } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
- 
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      toast.error("Por favor, complete todos los campos.");
-      return;
-    }
-    const result = await Login(email, password);
-    console.log("Resultado del login:", result);
-    if (!result.success) {
-      toast.error(result.message || "Credenciales incorrectas.");
+
+    if (email.trim() === "" || password.trim() === "") {
+      toast.error("Por favor completa todos los campos");
       return;
     }
 
+    try {
+      const res = await axios.post(
+        "http://localhost:4000/api/login",
+        { email, password },
+        { withCredentials: true }
+      );
 
-    toast.success("Inicio de sesión exitoso.");
-    setIsLoggedIn(true);
-    navigate("/")
-    
+      if (res.data.message === "login successful") {
+        toast.success("Inicio de sesión exitoso");
+        navigate("/");
+      } else {
+        toast.error(res.data.message || "Error al iniciar sesión");
+      }
+    } catch (error) {
+      toast.error("Error en el servidor");
+    }
   };
-/*
-useEffect(() => {
-  console.log("Entrando a useEffect del Login...");
-  console.log("authCokie:", authCokie);
-  console.log("isLoggedIn:", isLoggedIn);
-
-  if (authCokie && isLoggedIn) {
-    console.log("Redirigiendo a productos...");
-    navigate("/Productos");
-  }
-}, [authCokie, isLoggedIn]);*/
 
   return (
     <div className="login-container">
-      <div className="image-side">
-        
+      {/* Lado izquierdo - Imagen */}
+      <div className="left-side">
+        <div className="image-container">
+          <img 
+            src={triathlonImage} 
+            alt="Triathlon promotional" 
+            className="promo-image"
+          />
+        </div>
       </div>
-      <div className="form-side">
 
-        <h1>Inicia Sesión</h1>
-        <div className="input-group">
-          <FaUser className="icon" />
-          <input type="email" placeholder="Correo Electrónico" required value={email} onChange={(e)=> setEmail(e.target.value)} />
+      {/* Lado derecho - Formulario */}
+      <div className="right-side">
+        <div className="form-wrapper">
+          <h2 className="form-title">Inicie sesión en BlueFruit</h2>
+          <p className="form-subtitle">Ingresa tus datos a continuación</p>
+          
+          <form onSubmit={handleLogin} className="login-form">
+            <div className="input-group">
+              <input
+                type="email"
+                placeholder="Correo electrónico o número de teléfono"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="login-input"
+                required
+              />
+            </div>
+            
+            <div className="input-group">
+              <input
+                type="password"
+                placeholder="Contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="login-input"
+                required
+              />
+            </div>
+            
+            <button type="submit" className="login-btn">
+              Iniciar Sesión
+            </button>
+            
+            <div className="forgot-password-container">
+              <a href="#" className="forgot-password-link">¿Olvidaste tu contraseña?</a>
+            </div>
+          </form>
         </div>
-        <div className="input-group">
-          <FaLock className="icon" />
-          <input type="password" placeholder="Contraseña" required value={password} onChange={(e)=> setPassword(e.target.value)} />
-        </div>
-        <button onClick={handleSubmit}>Ingresar</button>
       </div>
     </div>
   );

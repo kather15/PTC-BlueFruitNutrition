@@ -10,6 +10,8 @@ import Register from './pages/Register/Register'
 import RequestCode from '../../frontend-public/src/pages/RecoveryPassword/RequestCode'
 import VerifyCode from '../../frontend-public/src/pages/RecoveryPassword/VerifyCode';
 import NewPassword from '../../frontend-public/src/pages/RecoveryPassword/NewPasssword';
+import Personalizar from '../../frontend-public/src/pages/Personalizar/SeleccionarGel';
+import Sabores from '../../frontend-public/src/pages/Personalizar/Sabores/SaborPage';
 
 function App() {
   return (
@@ -21,8 +23,10 @@ function App() {
        <Route path="/pay" element={<Pay />} />
           <Route path="/registro" element={<Register />}/>
           <Route path="/enviar-codigo" element={<RequestCode/>}/>
+          <Route path="/carrito" element={<Personalizar/>}/>
           <Route path="/verificar-codigo" element={<VerifyCode/>}/>
           <Route path="/nueva-contraseña" element={<NewPassword/>}/>
+          <Route path="/sabores" element={<Sabores/>}/>
       </Routes>
 
       <Footer />
