@@ -14,8 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    // Permitir envío de cookies y credenciales
+    origin: ["http://localhost:5173", "http://localhost:5174"], // Permite ambos puertos
     credentials: true
   })
 );

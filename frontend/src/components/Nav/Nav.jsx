@@ -9,7 +9,7 @@ const NavBar = () => {
           <img src="/Logo_Blue_Fruit.png" alt="Logo Blue Fruit" />
         </div>
         <ul className="navbar-list">
-          <li><a href="inicio">Inicio</a></li>
+          <li><a href="homep">Inicio</a></li>
           <li><a href="productos1">Productos</a></li>
           <li><a href="ordenes">Órdenes</a></li>
           <li><a href="ventas">Ventas</a></li>

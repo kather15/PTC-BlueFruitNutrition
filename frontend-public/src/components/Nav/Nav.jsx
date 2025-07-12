@@ -12,11 +12,15 @@ const Nav = () => {
         <ul className="navbar-list">
           <li><Link to="/">Inicio</Link></li>
           <li><Link to="/sobreNosotros">Sobre Nosotros</Link></li>
-          <li><Link to="/productos">Productos</Link></li>  
+          <li><Link to="/products2">Productos</Link></li>  
           <li><Link to="/carrito">Carrito</Link></li>
           <li><Link to="/suscripciones">Suscribirse</Link></li>
-
         </ul>
+        <div className="navbar-login-btn">
+          <Link to="/login">
+            <button className="login-btn-nav">👤</button>
+          </Link>
+        </div>
       </div>
     </nav>
   );
