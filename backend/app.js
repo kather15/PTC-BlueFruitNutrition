@@ -9,7 +9,7 @@ import registerCustomersRoutes from "./src/routes/registerCustomer.js"
 import passwordRecoveryRoutes from "./src/routes/passwordRecovery.js";
 import loginRoutes from "./src/routes/login.js"
 import logoutRoutes from "./src/routes/logout.js";
-import subscriptionRoutes from './routes/subscriptionRoutes.js';
+import subscriptionRoutes from './src/routes/Suscripciones.js';
 
 const app = express();
 

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import toast from "react-hot-toast";
-import VerifyCodeModal from "../../components/verifyCode/verifyCodeModal"
+import VerifyCodeModal from "../../../../frontend/src/components/verifyCode/verifyCodeModal"
 import img from '../../assets/imgregister.png'
 import './Register.css'
 

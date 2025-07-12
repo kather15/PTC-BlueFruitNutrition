@@ -91,7 +91,7 @@ const handleLogin = async (e) => {
             </button>
             
             <div className="forgot-password-container">
-              <a href="#" className="forgot-password-link">¿Olvidaste tu contraseña?</a>
+              <a href="/enviar-codigo" className="forgot-password-link">¿Olvidaste tu contraseña?</a>
             </div>
           </form>
         </div>
