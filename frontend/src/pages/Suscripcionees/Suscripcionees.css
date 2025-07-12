@@ -37,3 +37,15 @@
 .suscripciones-tabla tr:last-child td {
   border-bottom: none;
 }
+.btn-editar {
+  padding: 5px 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-editar:hover {
+  background-color: #2980b9;
+}
