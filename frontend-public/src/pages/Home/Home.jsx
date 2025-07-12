@@ -61,7 +61,7 @@ const Home = () => {
               <li>Apoyo al rendimiento y bienestar del deportista</li>
             </ul>
           </div>
-          <img src="/imagen 52.png" alt="Atleta" />
+          <img src="/image 5.png" alt="Atleta" />
         </div>
       </section>
 
@@ -95,22 +95,22 @@ const Home = () => {
         <h2>Nuestro Equipo</h2>
         <div className="blue-fruit-miembros">
           <div className="blue-fruit-miembro">
-            <img src="/imagen 53.png" alt="Deportista 1" />
+            <img src="/image 52.png" alt="Deportista 1" />
             <h4>Deportista #1</h4>
             <p>Atleta</p>
           </div>
           <div className="blue-fruit-miembro">
-            <img src="/imagen 54.png" alt="Deportista 2" />
+            <img src="/image 53.png" alt="Deportista 2" />
             <h4>Deportista #2</h4>
             <p>Ciclismo</p>
           </div>
           <div className="blue-fruit-miembro">
-            <img src="/imagen 53.png" alt="Deportista 3" />
+            <img src="/image 54.png" alt="Deportista 3" />
             <h4>Deportista #3</h4>
             <p>Competencia</p>
           </div>
           <div className="blue-fruit-miembro">
-            <img src="/imagen 53.png" alt="Deportista 4" />
+            <img src="/image 55.png" alt="Deportista 4" />
             <h4>Deportista #4</h4>
             <p>Profesional</p>
           </div>
