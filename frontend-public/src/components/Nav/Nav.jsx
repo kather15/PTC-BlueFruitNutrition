@@ -13,8 +13,6 @@ const Nav = () => {
           <li><Link to="/">Inicio</Link></li>
           <li><Link to="/sobreNosotros">Sobre Nosotros</Link></li>
           <li className="active-nav-link"><Link to="/productos">Productos</Link></li>
-          <li><Link to="/sabores">Sabores</Link></li>
-          <li><Link to="/beneficios">Beneficios</Link></li>
         </ul>
       </div>
       <div className="blue-fruit-search-box">
