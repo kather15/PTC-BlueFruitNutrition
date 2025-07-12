@@ -2,35 +2,70 @@ const customersController = {};
 import customersModel from "../models/Customers.js";
 
 //SELECT*******************************************************************
-customersController.getCustomers = async(req, res) =>{
-    const customer = await customersModel.find();
+customersController.getCustomers = async (req, res) => {
+    try {
 
-    res.json(customer)
+        const customer = await customersModel.find();
+        res.status(200).json(customer)
+
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+        console.log("error: " + error)
+
+    }
+
 }
 
 //INSERT*******************************************************************
-customersController.postCustomers = async(req, res) =>{
-    const{ name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idSports, isVerified } = req.body;
-    const newCustomer = new customersModel({name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idSports, isVerified})
-    await newCustomer.save();
+customersController.postCustomers = async (req, res) => {
+    try {
+        const { name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idSports, isVerified } = req.body;
 
-    res.json({message: "Customer saved"})
+        const newCustomer = new customersModel({ name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idSports, isVerified })
+        await newCustomer.save();
+        res.status(200).json({ message: "customer saved" })
+
+
+        res.json({ message: "Customer saved" })
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+        console.log("error: " + error)
+    }
+
 }
 
 //DELETE*******************************************************************
-customersController.deleteCustomers = async(req,res) =>{
-    await customersModel.findByIdAndDelete(req.params.id)
+customersController.deleteCustomers = async (req, res) => {
+    try {
+        await customersModel.findByIdAndDelete(req.params.id)
+        res.status(200).json({ message: "customer deleted" })
 
-    res.json({message: "Customer deleted"})
+        res.json({ message: "Customer deleted" });
+
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+        console.log("error: " + error)
+    }
 }
 
 //UPDATE*******************************************************************
-customersController.putCustomers = async(req, res)=>{
-    const{ name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idSports, isVerified } = req.body;
-    const updateCustomer = await customersModel.findByIdAndUpdate(req.params.id, {name, lastName, email, password, phone, weight, dateBirth, height,
-                                                                                address, gender, idSports, isVerified}, {new: true})
+customersController.putCustomers = async (req, res) => {
 
-    res.json({message: "Customer updated successfully"})
+    try {
+        const { name, lastName, email, password, phone, weight, dateBirth, height, address, gender, idSports, isVerified } = req.body;
+        const updateCustomer = await customersModel.findByIdAndUpdate(req.params.id, {
+            name, lastName, email, password, phone, weight, dateBirth, height,
+            address, gender, idSports, isVerified
+        }, { new: true })
+        res.json({ message: "Customer updated successfully" })
+        res.status(200).json({ message: "customer updated" })
+
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+        console.log("error: " + error)
+    }
+
+
 }
 
 export default customersController;
