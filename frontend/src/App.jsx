@@ -8,7 +8,8 @@ import AddProduct from './pages/AddProducts/Products';
 import Products1 from './pages/Products/Products1';
 import Suscripciones from './pages/Suscripcionees/Suscripcionees';
 import Ordenes from './pages/Ordenes/Ordenes';
-import Homep from './pages/Home/Homep'; // Ruta corregida (ya no ../../frontend)
+import Homep from './pages/Home/Homep'; 
+import Ventas from './pages/Ventas/Ventas';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/ordenes" element={<Ordenes />} />
           <Route path="/suscripciones" element={<Suscripciones />} />
           <Route path="/homep" element={<Homep />} />
+          <Route path="/ventas" element={<Ventas />} />
           {/* Puedes agregar más rutas aquí */}
         </Routes>
       </div>

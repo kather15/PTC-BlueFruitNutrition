@@ -6,7 +6,7 @@ function CartItem({ product, onEdit, onDelete }) {
     <div className="cart-card">
       <div className="cart-image-container">
         <div className="cart-image-bg" />
-        <img src={product.image} alt={product.name} className="cart-image" />
+        <img src={product.image || "/producticon.png"} alt={product.name} className="cart-image" />
       </div>
       <h3 className="cart-title">{product.name}</h3>
       <div className="cart-actions">
