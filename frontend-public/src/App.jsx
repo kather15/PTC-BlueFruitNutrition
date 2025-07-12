@@ -12,6 +12,9 @@ import VerifyCode from '../../frontend-public/src/pages/RecoveryPassword/VerifyC
 import NewPassword from '../../frontend-public/src/pages/RecoveryPassword/NewPasssword';
 import Personalizar from '../../frontend-public/src/pages/Personalizar/SeleccionarGel';
 import Sabores from '../../frontend-public/src/pages/Personalizar/Sabores/SaborPage';
+import Suscripciones from '../../frontend-public/src/pages/Suscripciones/Suscripciones';
+import Login from '../../frontend-public/src/pages/Login/Login'; // Asegúrate de que esta ruta sea correcta
+
 
 function App() {
   return (
@@ -27,6 +30,12 @@ function App() {
           <Route path="/verificar-codigo" element={<VerifyCode/>}/>
           <Route path="/nueva-contraseña" element={<NewPassword/>}/>
           <Route path="/sabores" element={<Sabores/>}/>
+          <Route path="/suscripciones" element={<Suscripciones />} />
+          <Route path="/login" element={<Login />}/>
+
+          {/* Puedes agregar más rutas aquí según sea necesario */}
+
+          
       </Routes>
 
       <Footer />
