@@ -3,28 +3,37 @@ import { useNavigate } from 'react-router-dom';
 import './Product1.css';
 
 const Products1 = () => {
+   // Estado para guardar los productos
   const [products, setProducts] = useState([]);
+  // Estado para controlar si los datos están cargando
   const [loading, setLoading] = useState(true);
+  // Estado para manejar errores
   const [error, setError] = useState(null);
+   // Hook para navegar a otras rutas
   const navigate = useNavigate();
 
+  // useEffect se ejecuta al montar el componente
   // Fetch productos desde tu API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        setLoading(true);
+        setLoading(true);// Activar loading mientras se hace la petición
+
         const response = await fetch('http://localhost:4000/api/products', {
           method: 'GET',
-          credentials: 'include',
+          credentials: 'include',// Para incluir cookies
           headers: {
             'Content-Type': 'application/json',
           }
         });
 
+         // Si la respuesta no es exitosa, lanza un error
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
         }
 
+        // Parsea la respuesta a JSON y actualiza el estado de productos
+         // Captura errores y los guarda en el estado
         const data = await response.json();
         setProducts(data);
         setError(null);
@@ -39,14 +48,18 @@ const Products1 = () => {
     fetchProducts();
   }, []);
 
+   // Función que redirige a la vista del producto
   const handleViewProduct = (productId) => {
     navigate(`/product/${productId}`);
   };
 
+  
+  // Función que simula la compra del producto (muestra un alert
   const handleBuyProduct = (product) => {
     alert(`Comprando: ${product.name} - $${product.price}`);
   };
 
+   // Si está cargando, muestra spinner y mensaje
   if (loading) {
     return (
       <div className="products-page">
@@ -58,6 +71,7 @@ const Products1 = () => {
     );
   }
 
+   // Si hay error, muestra mensaje de error con botón para recargar
   if (error) {
     return (
       <div className="products-page">

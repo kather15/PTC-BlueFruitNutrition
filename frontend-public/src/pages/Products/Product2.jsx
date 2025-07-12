@@ -3,13 +3,16 @@ import { useParams, useNavigate } from 'react-router-dom';
 import './Product2.css';
 
 const Product2 = () => {
-  const { id } = useParams();
+  const { id } = useParams();// Obtiene el ID del producto desde la URL
   const navigate = useNavigate();
+
+  // Estados del componente
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [showReviewForm, setShowReviewForm] = useState(false);
+  // Reseñas iniciales simuladas
   const [reviews, setReviews] = useState([
     {
       id: 1,
@@ -33,6 +36,8 @@ const Product2 = () => {
       date: "8 Nov 2024"
     }
   ]);
+
+  // Estado para nueva reseña escrita por el usuario
   const [newReview, setNewReview] = useState({
     user: '',
     rating: 5,
@@ -110,6 +115,7 @@ const Product2 = () => {
     ));
   };
 
+     // Validación: no permite campos vacíos
   const handleReviewSubmit = (e) => {
     e.preventDefault();
     if (newReview.user.trim() && newReview.comment.trim()) {
@@ -144,6 +150,7 @@ const Product2 = () => {
     );
   }
 
+  // Muestra error si no se encuentra el producto
   if (error || !product) {
     return (
       <div className="product-page">

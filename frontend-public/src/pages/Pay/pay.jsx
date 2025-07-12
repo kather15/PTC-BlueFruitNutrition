@@ -64,6 +64,7 @@ const Pay = () => {
           </div>
         </div>
 
+      {/* Vista trasera de la tarjeta */}
         <div className="credit-card-mockup back">
           <div className="magnetic-stripe"></div>
           <div className="card-holder-back-info">
