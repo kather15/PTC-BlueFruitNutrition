@@ -13,8 +13,9 @@ const Nav = () => {
           <li><Link to="/">Inicio</Link></li>
           <li><Link to="/sobreNosotros">Sobre Nosotros</Link></li>
           <li><Link to="/products2">Productos</Link></li>  
-          <li><Link to="/carrito">Carrito</Link></li>
+          <li><Link to="/personalizar">Personalizar</Link></li>
           <li><Link to="/suscripciones">Suscribirse</Link></li>
+          <li><Link to="/pay">pago</Link></li>
         </ul>
         <div className="navbar-login-btn">
           <Link to="/login">

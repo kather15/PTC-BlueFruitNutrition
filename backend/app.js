@@ -34,4 +34,4 @@ app.use("/api/logout", logoutRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 
 
-export default app;
+export default app;
