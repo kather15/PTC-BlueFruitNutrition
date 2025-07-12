@@ -12,6 +12,8 @@ import Homep from './pages/Home/Homep'; // Ruta corregida (ya no ../../frontend)
 import RequestCode from './pages/RecoveryPassword/RequestCode';
 import VerifyCode from './pages/RecoveryPassword/VerifyCode';
 import NewPassword from './pages/RecoveryPassword/NewPasssword';
+import UsersList from "./pages/Users/UsersList";
+import UserForm from "./pages/Users/UserForm";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
                     <Route path="/enviar-codigo" element={<RequestCode/>}/>
                     <Route path="/verificar-codigo" element={<VerifyCode/>}/>
                     <Route path="/nueva-contraseña" element={<NewPassword/>}/>
+                <Route path="/users" element={<UsersList />} />
+        <Route path="/users/edit/:type/:id" element={<UserForm />} />
           {/* Puedes agregar más rutas aquí */}
         </Routes>
       </div>
