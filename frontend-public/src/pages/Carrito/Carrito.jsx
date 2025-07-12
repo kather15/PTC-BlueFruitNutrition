@@ -83,7 +83,7 @@ const Carrito = () => {
                 <td>${calcularSubtotal(producto)}</td>
                 <td>
                   <button onClick={() => eliminarProducto(producto.id)}>
-                    🗑️
+                    
                   </button>
                 </td>
               </tr>

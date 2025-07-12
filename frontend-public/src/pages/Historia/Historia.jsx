@@ -1,7 +1,7 @@
 import React from 'react';
 import './Historia.css';
 import atleta from '../assets/atleta.jpg';
-import deportista1 from '../p/deportista1.jpg';
+import deportista1 from '/frontend-public/public/image 52.png';
 import deportista2 from '../assets/deportista2.jpg';
 import deportista3 from '../assets/deportista3.jpg';
 import deportista4 from '../assets/deportista4.jpg';
