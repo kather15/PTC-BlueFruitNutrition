@@ -10,31 +10,39 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+const handleLogin = async (e) => {
+  e.preventDefault();
 
-    if (email.trim() === "" || password.trim() === "") {
-      toast.error("Por favor completa todos los campos");
-      return;
-    }
+  if (email.trim() === "" || password.trim() === "") {
+    toast.error("Por favor completa todos los campos");
+    return;
+  }
 
-    try {
-      const res = await axios.post(
-        "http://localhost:4000/api/login",
-        { email, password },
-        { withCredentials: true }
-      );
+  try {
+    const res = await axios.post(
+      "http://localhost:4000/api/login",
+      { email, password },
+      { withCredentials: true }
+    );
 
-      if (res.data.message === "login successful") {
-        toast.success("Inicio de sesión exitoso");
-        navigate("/");
+    if (res.data.message === "login successful") {
+      toast.success("Inicio de sesión exitoso");
+
+      if (res.data.role === "admin") {
+        // 🔁 Redirección completa a la app del admin (en otro puerto)
+        window.location.href = "http://localhost:5174";
       } else {
-        toast.error(res.data.message || "Error al iniciar sesión");
+        // 🧭 Para usuarios normales, redirige dentro de la misma app
+        navigate("/");
       }
-    } catch (error) {
-      toast.error("Error en el servidor");
+    } else {
+      toast.error(res.data.message || "Error al iniciar sesión");
     }
-  };
+  } catch (error) {
+    toast.error("Error en el servidor");
+  }
+};
+
 
   return (
     <div className="login-container">
