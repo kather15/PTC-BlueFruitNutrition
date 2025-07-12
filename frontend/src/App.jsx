@@ -9,6 +9,8 @@ import Products1 from './pages/Products/Products1';
 import Suscripciones from './pages/Suscripcionees/Suscripcionees';
 import Ordenes from './pages/Ordenes/Ordenes';
 import Homep from './pages/Home/Homep'; // Ruta corregida (ya no ../../frontend)
+import UsersList from "./pages/Users/UsersList";
+import UserForm from "./pages/Users/UserForm";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/ordenes" element={<Ordenes />} />
           <Route path="/suscripciones" element={<Suscripciones />} />
           <Route path="/homep" element={<Homep />} />
+          <Route path="/users" element={<UsersList />} />
+          <Route path="/users/edit/:type/:id" element={<UserForm />} />
           {/* Puedes agregar más rutas aquí */}
         </Routes>
       </div>
