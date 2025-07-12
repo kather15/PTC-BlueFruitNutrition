@@ -5,7 +5,8 @@ import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Pay from "./pages/Pay/pay";
-//import Products from "./pages/Products/Product2";
+import Contact from "./pages/Contact/Contact"; 
+import Product from "./pages/Products/Products";
 import Register from './pages/Register/Register'
 import RequestCode from '../../frontend-public/src/pages/RecoveryPassword/RequestCode'
 import VerifyCode from '../../frontend-public/src/pages/RecoveryPassword/VerifyCode';
@@ -13,12 +14,16 @@ import NewPassword from '../../frontend-public/src/pages/RecoveryPassword/NewPas
 import Personalizar from '../../frontend-public/src/pages/Personalizar/SeleccionarGel';
 import Sabores from '../../frontend-public/src/pages/Personalizar/Sabores/SaborPage';
 import Suscripciones from '../../frontend-public/src/pages/Suscripciones/Suscripciones';
-import Login from '../../frontend-public/src/pages/Login/Login'; // Asegúrate de que esta ruta sea correcta
+import ProductDetail from '../../frontend-public/src/pages/Personalizar/productGallery/Product';
+import Login from '../../frontend-public/src/pages/Login/Login'; 
 
 
 function App() {
+
+
   return (
     <>
+    
       <Nav />
         
       <Routes>
@@ -26,16 +31,21 @@ function App() {
        <Route path="/pay" element={<Pay />} />
           <Route path="/registro" element={<Register />}/>
           <Route path="/enviar-codigo" element={<RequestCode/>}/>
-          <Route path="/carrito" element={<Personalizar/>}/>
+          <Route path="/personalizar" element={<Personalizar/>}/>
           <Route path="/verificar-codigo" element={<VerifyCode/>}/>
           <Route path="/nueva-contraseña" element={<NewPassword/>}/>
           <Route path="/sabores" element={<Sabores/>}/>
           <Route path="/suscripciones" element={<Suscripciones />} />
           <Route path="/login" element={<Login />}/>
-
+          <Route path="/detail" element={<ProductDetail />} />
+            <Route path="/product" element={<Product />} />
           {/* Puedes agregar más rutas aquí según sea necesario */}
 
           
+
+  
+        <Route path="/contact" element={<Contact/>} />
+      
       </Routes>
 
       <Footer />

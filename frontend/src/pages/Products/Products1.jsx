@@ -1,12 +1,43 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Products1.css";
-import CartItem from "../../components/CardProducts/CardProducts"; // Asegúrate de que la ruta sea correcta
+import React, { useState, useEffect } from 'react';
+import './Products1.css';
 
 const API_URL = "http://localhost:4000/api/products";
 
+
+function ProductCard({ product, onEdit, onDelete }) {
+  return (
+    <div className="product-card">
+      <div className="product-image-container">
+        <img
+          src={product.image || "/producticon.png"}
+          alt={product.name}
+          className="product-image"
+        />
+      </div>
+      <h3 className="product-name">{product.name}</h3>
+      <div className="product-buttons">
+        <button 
+          className="edit-btn"
+          onClick={() => onEdit(product)}
+        >
+          Editar
+        </button>
+        <button 
+          className="delete-btn"
+          onClick={() => onDelete(product._id)}
+        >
+          🗑️
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// Componente principal
 function ProductManager() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({
     name: "",
@@ -17,16 +48,27 @@ function ProductManager() {
     image: null,
   });
   const [showEditModal, setShowEditModal] = useState(false);
-  const navigate = useNavigate();
+  const [showAddModal, setShowAddModal] = useState(false);
 
+  // Fetch products al cargar
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
-    const res = await fetch(API_URL);
-    const data = await res.json();
-    setProducts(data);
+    try {
+      setLoading(true);
+      const response = await fetch(API_URL);
+      if (!response.ok) {
+        throw new Error('Error al cargar productos');
+      }
+      const data = await response.json();
+      setProducts(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const openEditModal = (product) => {
@@ -42,8 +84,22 @@ function ProductManager() {
     setShowEditModal(true);
   };
 
-  const closeEditModal = () => {
+  const openAddModal = () => {
+    setEditForm({
+      name: "",
+      description: "",
+      flavor: "",
+      price: "",
+      idNutritionalValues: "",
+      image: null,
+    });
+    setEditingId(null);
+    setShowAddModal(true);
+  };
+
+  const closeModal = () => {
     setShowEditModal(false);
+    setShowAddModal(false);
     setEditingId(null);
     setEditForm({
       name: "",
@@ -55,15 +111,15 @@ function ProductManager() {
     });
   };
 
-  const handleEditChange = (e) => {
+  const handleInputChange = (e) => {
     setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
 
-  const handleEditImageChange = (e) => {
+  const handleImageChange = (e) => {
     setEditForm({ ...editForm, image: e.target.files[0] });
   };
 
-  const handleEditSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -74,69 +130,115 @@ function ProductManager() {
     }
 
     try {
-      const res = await fetch(`${API_URL}/${editingId}`, {
-        method: "PUT",
-        body: formData,
-      });
-
-      if (res.ok) {
-        await fetchProducts();
-        closeEditModal();
-        alert("Producto actualizado correctamente");
+      let response;
+      if (editingId) {
+        // Actualizar producto existente
+        response = await fetch(`${API_URL}/${editingId}`, {
+          method: "PUT",
+          body: formData,
+        });
       } else {
-        alert("Error al actualizar el producto.");
+        // Crear nuevo producto
+        response = await fetch(API_URL, {
+          method: "POST",
+          body: formData,
+        });
+      }
+
+      if (response.ok) {
+        await fetchProducts();
+        closeModal();
+        alert(editingId ? "Producto actualizado correctamente" : "Producto agregado correctamente");
+      } else {
+        alert("Error al guardar el producto.");
       }
     } catch (err) {
-      console.error("Error al actualizar:", err);
+      console.error("Error al guardar:", err);
+      alert("Error al guardar el producto.");
     }
   };
 
   const handleDelete = async (id) => {
     if (window.confirm("¿Estás seguro de eliminar este producto?")) {
-      await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-      await fetchProducts();
+      try {
+        const response = await fetch(`${API_URL}/${id}`, { 
+          method: "DELETE" 
+        });
+        
+        if (response.ok) {
+          await fetchProducts();
+          alert("Producto eliminado correctamente");
+        } else {
+          alert("Error al eliminar el producto");
+        }
+      } catch (err) {
+        console.error("Error al eliminar:", err);
+        alert("Error al eliminar el producto");
+      }
     }
   };
+
+  if (loading) {
+    return (
+      <div className="products-container">
+        <div className="loading">Cargando productos...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="products-container">
+        <div className="error">Error: {error}</div>
+        <button onClick={fetchProducts}>Reintentar</button>
+      </div>
+    );
+  }
 
   return (
     <div className="products-container">
       <h2 className="products-title">Productos</h2>
       <button
         className="add-product-btn"
-        onClick={() => navigate("/addProduct")}
+        onClick={openAddModal}
       >
-        Agregar Producto
+        Agregar Productos
       </button>
 
-      <div className="product-grid">
-        {products.map((p) => (
-          <CartItem
-            key={p._id}
-            product={p}
-            onEdit={openEditModal}
-            onDelete={handleDelete}
-          />
-        ))}
-      </div>
+      {products.length === 0 ? (
+        <div className="loading">No hay productos disponibles</div>
+      ) : (
+        <div className="product-grid">
+          {products.map((product) => (
+            <ProductCard
+              key={product._id}
+              product={product}
+              onEdit={openEditModal}
+              onDelete={handleDelete}
+            />
+          ))}
+        </div>
+      )}
 
-      {showEditModal && (
+      {/* Modal para agregar/editar */}
+      {(showEditModal || showAddModal) && (
         <div className="modal-backdrop">
           <div className="modal-content">
-            <h3>Editar Producto</h3>
-            <form onSubmit={handleEditSubmit}>
+            <h3>{editingId ? 'Editar Producto' : 'Agregar Producto'}</h3>
+            <form onSubmit={handleSubmit}>
               <input
                 type="text"
                 name="name"
-                placeholder="Nombre:"
+                placeholder="Nombre del producto"
                 value={editForm.name}
-                onChange={handleEditChange}
+                onChange={handleInputChange}
                 required
               />
               <textarea
                 name="description"
-                placeholder="Descripción:"
+                placeholder="Descripción del producto"
                 value={editForm.description}
-                onChange={handleEditChange}
+                onChange={handleInputChange}
                 rows="4"
                 required
               />
@@ -144,17 +246,17 @@ function ProductManager() {
                 <input
                   type="text"
                   name="flavor"
-                  placeholder="Sabor:"
+                  placeholder="Sabor"
                   value={editForm.flavor}
-                  onChange={handleEditChange}
+                  onChange={handleInputChange}
                   required
                 />
                 <input
-                  type="text"
+                  type="number"
                   name="price"
-                  placeholder="Precio:"
+                  placeholder="Precio"
                   value={editForm.price}
-                  onChange={handleEditChange}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -163,40 +265,44 @@ function ProductManager() {
                 name="idNutritionalValues"
                 placeholder="ID Valores Nutricionales (opcional)"
                 value={editForm.idNutritionalValues}
-                onChange={handleEditChange}
+                onChange={handleInputChange}
               />
+              
               <div className="image-preview">
                 {editForm.image ? (
                   <img
                     src={URL.createObjectURL(editForm.image)}
                     alt="preview"
                   />
-                ) : (
+                ) : editingId && products.find(p => p._id === editingId)?.image ? (
                   <img
-                    src={
-                      products.find((p) => p._id === editingId)?.image ||
-                      "/producticon.png"
-                    }
-                    alt="placeholder"
+                    src={products.find(p => p._id === editingId)?.image}
+                    alt="current"
                   />
+                ) : (
+                  <span className="image-preview-text">Vista previa de imagen</span>
                 )}
               </div>
+              
               <input
                 type="file"
-                id="imageUploadEdit"
                 accept="image/*"
-                onChange={handleEditImageChange}
+                onChange={handleImageChange}
               />
-              <div className="form-buttons" style={{ marginTop: 10 }}>
+              
+              <div className="form-buttons">
                 <button
                   type="button"
-                  onClick={closeEditModal}
+                  onClick={closeModal}
                   className="clear-btn"
                 >
                   Cancelar
                 </button>
-                <button type="submit" className="submit-btn">
-                  Actualizar
+                <button
+                  type="submit"
+                  className="submit-btn"
+                >
+                  {editingId ? 'Actualizar' : 'Agregar'}
                 </button>
               </div>
             </form>

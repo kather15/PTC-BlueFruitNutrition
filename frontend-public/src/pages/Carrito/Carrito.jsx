@@ -1,6 +1,6 @@
 // src/components/Carrito.js
 import React, { useState } from "react";
-import "./../styles/Carrito.css";
+import ".//Carrito.css";
 
 const productosIniciales = [
   {
