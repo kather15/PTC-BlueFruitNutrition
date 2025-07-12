@@ -8,7 +8,7 @@ import AddProduct from './pages/AddProducts/Products';
 import Products1 from './pages/Products/Products1';
 import Suscripciones from './pages/Suscripcionees/Suscripcionees';
 import Ordenes from './pages/Ordenes/Ordenes';
-import Homep from './pages/Home/Homep'; 
+import Homep from './pages/Home/Homep';
 import Ventas from './pages/Ventas/Ventas';
 
 function App() {
