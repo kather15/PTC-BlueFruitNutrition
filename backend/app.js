@@ -9,6 +9,7 @@ import registerCustomersRoutes from "./src/routes/registerCustomer.js"
 import passwordRecoveryRoutes from "./src/routes/passwordRecovery.js";
 import loginRoutes from "./src/routes/login.js"
 import logoutRoutes from "./src/routes/logout.js";
+import subscriptionRoutes from './routes/subscriptionRoutes.js';
 
 const app = express();
 
@@ -30,6 +31,8 @@ app.use("/api/registerCustomers", registerCustomersRoutes)
 app.use("/api/passwordRecovery", passwordRecoveryRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/logout", logoutRoutes);
+
+app.use('/api/subscriptions', subscriptionRoutes);
 
 
 export default app;
