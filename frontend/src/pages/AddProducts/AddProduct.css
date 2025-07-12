@@ -16,23 +16,6 @@ body {
   padding: 0;
 }
 
-.main-container {
-  min-height: calc(100vh - 80px); /* Ajustá si tenés navbar más alto o más bajo */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  background-color: #f9f9f9;
-}
-
-.title {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-  color: var(--primary);
-}
-
 .card-form {
   background: var(--accent);
   display: flex;
@@ -46,6 +29,7 @@ body {
   max-width: 900px;
   width: 100%;
   box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .form-left {
@@ -81,6 +65,11 @@ body {
   padding: 0.5rem 1.2rem;
   border-radius: var(--radius);
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.upload-btn:hover {
+  background-color: #1c1c2a;
 }
 
 .form-right {
@@ -96,7 +85,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   font-size: 1rem;
-  background-color: #fff; /* Corrige campos oscuros */
+  background-color: #fff;
   color: #000;
 }
 
@@ -120,4 +109,10 @@ body {
   border-radius: var(--radius);
   cursor: pointer;
   font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.clear-btn:hover,
+.submit-btn:hover {
+  background-color: #1c1c2a;
 }
