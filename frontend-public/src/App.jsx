@@ -6,9 +6,7 @@ import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Pay from "./pages/Pay/pay";
 import Contact from "./pages/Contact/Contact"; 
-
-
-//import Products from "./pages/Products/Product2";
+import Product from "./pages/Products/Products";
 import Register from './pages/Register/Register'
 import RequestCode from '../../frontend-public/src/pages/RecoveryPassword/RequestCode'
 import VerifyCode from '../../frontend-public/src/pages/RecoveryPassword/VerifyCode';
@@ -17,8 +15,7 @@ import Personalizar from '../../frontend-public/src/pages/Personalizar/Seleccion
 import Sabores from '../../frontend-public/src/pages/Personalizar/Sabores/SaborPage';
 import Suscripciones from '../../frontend-public/src/pages/Suscripciones/Suscripciones';
 import ProductDetail from '../../frontend-public/src/pages/Personalizar/productGallery/Product';
-import Login from '../../frontend-public/src/pages/Login/Login'; // Asegúrate de que esta ruta sea correcta
-
+import Login from '../../frontend-public/src/pages/Login/Login'; 
 
 
 function App() {
@@ -41,7 +38,7 @@ function App() {
           <Route path="/suscripciones" element={<Suscripciones />} />
           <Route path="/login" element={<Login />}/>
           <Route path="/detail" element={<ProductDetail />} />
-
+            <Route path="/product" element={<Product />} />
           {/* Puedes agregar más rutas aquí según sea necesario */}
 
           
