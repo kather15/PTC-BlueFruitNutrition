@@ -25,13 +25,12 @@ function App() {
       <NavBar />
       <div className="main-content" style={{ paddingTop: '100px' }}>
         <Routes>
-          <Route path="/" element={<h1>Bienvenido a la tienda</h1>} />
           <Route path="/productos1" element={<Products1 />} />
           <Route path="/addProduct" element={<AddProduct />} />
           <Route path="/sobre-nosotros" element={<h1>Sobre Nosotros</h1>} />
           <Route path="/ordenes" element={<Ordenes />} />
           <Route path="/suscripciones" element={<Suscripciones />} />
-          <Route path="/homep" element={<Homep />} />
+          <Route path="/" element={<Homep />} />
           <Route path="/ordenes" element={<Ordenes />} />
           <Route path="/suscripciones" element={<Suscripciones />} />
           <Route path="/homep" element={<Homep />} />

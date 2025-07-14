@@ -5,9 +5,9 @@ import './home.css';
 const SportsGelAdmin = () => {
   const [activeTab, setActiveTab] = useState('productos');
   const [products, setProducts] = useState([
-    { id: 1, nombre: 'Gel Energético Citrus', sabor: 'Cítrico', precio: 2.50, stock: 150 },
-    { id: 2, nombre: 'Gel Carbohidrato Berry', sabor: 'Frutos Rojos', precio: 2.80, stock: 120 },
-    { id: 3, nombre: 'Gel Isotónico Tropical', sabor: 'Tropical', precio: 3.00, stock: 80 }
+    { id: 1, nombre: 'Gel CarboUpp', sabor: 'Cítrico', precio: 2.50, stock: 150 },
+    { id: 2, nombre: 'Gel Ener kik', sabor: 'Frutos Rojos', precio: 2.80, stock: 120 },
+    { id: 3, nombre: 'Gel EnerBalance', sabor: 'Tropical', precio: 3.00, stock: 80 }
   ]);
 
   const handleDeleteProduct = (id) => {

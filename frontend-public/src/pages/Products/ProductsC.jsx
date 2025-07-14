@@ -10,7 +10,7 @@ const ProductsC = () => {
     {
       id: 1,
       name: 'Carbo Upp',
-      image: '/CarboUpp.png'
+      image: '/EnerKik.png'
     },
     {
       id: 2,

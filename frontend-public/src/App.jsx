@@ -17,6 +17,8 @@ import Suscripciones from '../../frontend-public/src/pages/Suscripciones/Suscrip
 import ProductDetail from '../../frontend-public/src/pages/Personalizar/productGallery/Product';
 import Login from '../../frontend-public/src/pages/Login/Login'; 
 import ProductsReview from "../src/pages/Products/ProductsReview";
+import Carrito from '../src/pages/Carrito/Carrito.jsx'
+import MetodoDePago from "../src/pages/MetodoDePago/CheckoutPage.jsx"
 
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
           <Route path="/suscripciones" element={<Suscripciones />} />
           <Route path="/login" element={<Login />}/>
           <Route path="/detail" element={<ProductDetail />} />
+          <Route path="/carrito" element={<Carrito/>} />
+          <Route path="/Metodo" element={<MetodoDePago/>} />
 
             <Route path="/product" element={<ProductC />} />
             <Route path="/producto/:id" element={<ProductsReview />} />

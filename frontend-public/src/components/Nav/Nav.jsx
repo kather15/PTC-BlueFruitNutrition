@@ -14,7 +14,7 @@ const Nav= () => {
             <li><Link to="/">Inicio</Link></li>
             <li><Link to="/sobre-nosotros">Sobre Nosotros</Link></li>
             <li><Link to="/product">Productos</Link></li>
-            <li><Link to="/sabores">Sabores</Link></li>
+            <li><Link to="/carrito">Carrito</Link></li>
           </ul>
         </div>
         <div className="blue-fruit-navbar-right">
