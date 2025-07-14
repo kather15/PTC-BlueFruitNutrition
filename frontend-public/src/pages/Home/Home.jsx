@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Home.css';
+import { Link } from 'react-router-dom'
+
 
 const productos = [
   { nombre: 'Carbo Upp', imagen: '/CarboUpp.png' },
@@ -41,10 +43,11 @@ const Home = () => {
         ))}
       </div>
 
-      <div className="blue-fruit-boton-ver-todos-container">
-        <button className="blue-fruit-boton-ver-todos">Ver todos los Productos</button>
-      </div>
-
+     <div className="blue-fruit-boton-ver-todos-container">
+  <Link to="/product" className="blue-fruit-boton-ver-todos">
+    Ver todos los Productos
+  </Link>
+</div>
       {/* Línea separadora debajo del botón */}
       <hr className="blue-fruit-linea-separadora" />
 

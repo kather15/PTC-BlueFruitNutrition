@@ -41,7 +41,7 @@ function App() {
           <Route path="/detail" element={<ProductDetail />} />
 
             <Route path="/product" element={<ProductC />} />
-            <Route path="/productReview" element={<ProductsReview/>} />
+            <Route path="/producto/:id" element={<ProductsReview />} />
           {/* Puedes agregar más rutas aquí según sea necesario */}
 
       
