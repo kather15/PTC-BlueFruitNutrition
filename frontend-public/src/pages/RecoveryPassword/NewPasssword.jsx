@@ -15,6 +15,7 @@ export default function ResetPassword() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
+      credentials: "include"
     });
 
     const data = await res.json();
@@ -22,6 +23,7 @@ export default function ResetPassword() {
     if (res.ok) {
       localStorage.removeItem("/");
     }
+ 
   };
 
   return (
