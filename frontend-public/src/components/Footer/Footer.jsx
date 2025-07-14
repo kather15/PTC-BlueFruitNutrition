@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate, Link } from 'react-router-dom';
 import "./Footer.css";
 
 const Footer = () => {
@@ -35,18 +36,22 @@ const Footer = () => {
           <p>+503 6859 7103</p>
         </div>
 
-        {/* Sección de cuenta para iniciar sesión o registrarse */}
-        <div className="blue-fruit-footer-section">
-          <h4>Cuenta</h4>
-          <p>Iniciar sesión / Registrarse</p>
-        </div>
+        {/* Sección de cuenta */}
+      <div className="blue-fruit-footer-section">
+        <h4>Cuenta</h4>
+        <p>
+          <Link to="/login" style={{ color: 'white', textDecoration: 'none' }}>Iniciar sesión</Link>
+           <Link to="/registro"style={{ color: 'white', textDecoration: 'none' }}> Registrarse</Link>
+        </p>
+      </div>
 
-        {/* Sección con enlaces rápidos del sitio */}
-        <div className="blue-fruit-footer-section">
-          <h4>Enlaces rápido</h4>
-          <p>Política de Privacidad</p>
-          <p>Contacto</p>
-        </div>
+      {/* Sección de enlaces rápidos */}
+      <div className="blue-fruit-footer-section">
+        <h4>Enlaces rápidos</h4>
+        <p>
+          <Link to="/contact"style={{ color: 'white', textDecoration: 'none' }}>Contacto</Link>
+        </p>
+      </div>
       </div>
 
       {/* Parte inferior del footer con derechos de autor */}
