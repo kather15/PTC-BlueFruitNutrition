@@ -14,7 +14,7 @@ const NavBar = () => {
           <li><a href="ordenes">Órdenes</a></li>
           <li><a href="ventas">Ventas</a></li>
           <li><a href="suscripciones">Suscripciones</a></li>
-          <li><a href="users">Usuarios</a></li>
+          <li><a href="usuarios">Usuarios</a></li>
         </ul>
       </div>
     </nav>

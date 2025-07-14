@@ -13,7 +13,11 @@ import RequestCode from './pages/RecoveryPassword/RequestCode';
 import VerifyCode from './pages/RecoveryPassword/VerifyCode';
 import NewPassword from './pages/RecoveryPassword/NewPasssword';
 import Ventas from './pages/Ventas/Ventas.jsx';
-import Usuarios from './pages/Users/UserForm.jsx';
+import Usuarios from './pages/Users/UsersList.jsx';
+import UserForm from './pages/Users/UserForm'; // 👈 faltaba esta
+
+
+
 
 function App() {
   return (
@@ -36,6 +40,7 @@ function App() {
                     <Route path="/nueva-contraseña" element={<NewPassword/>}/>
                     <Route path="/ventas" element={<Ventas />} />
                     <Route path="/usuarios" element={<Usuarios />} />
+                    <Route path="/users/edit/:type/:id" element={<UserForm />} /> {/* ✅ esta línea es clave */}s
           {/* Puedes agregar más rutas aquí */}
         </Routes>
       </div>

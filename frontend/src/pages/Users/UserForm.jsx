@@ -37,7 +37,7 @@ function UserForm() {
       body: JSON.stringify(formData),
     });
 
-    navigate("/users");
+    navigate("/usuarios");
   };
 
   if (!formData) return <p className="loading-text">Cargando...</p>;
