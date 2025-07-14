@@ -8,8 +8,15 @@ import AddProduct from './pages/AddProducts/Products';
 import Products1 from './pages/Products/Products1';
 import Suscripciones from './pages/Suscripcionees/Suscripcionees';
 import Ordenes from './pages/Ordenes/Ordenes';
+<<<<<<< HEAD
 import Homep from './pages/Home/Homep';
 import Ventas from './pages/Ventas/Ventas';
+=======
+import Homep from './pages/Home/Homep'; // Ruta corregida (ya no ../../frontend)
+import RequestCode from './pages/RecoveryPassword/RequestCode';
+import VerifyCode from './pages/RecoveryPassword/VerifyCode';
+import NewPassword from './pages/RecoveryPassword/NewPasssword';
+>>>>>>> 6615d7e3a665c438aef5756d5f246e25d5fbd9c1
 
 function App() {
   return (
@@ -25,7 +32,16 @@ function App() {
           <Route path="/ordenes" element={<Ordenes />} />
           <Route path="/suscripciones" element={<Suscripciones />} />
           <Route path="/homep" element={<Homep />} />
+<<<<<<< HEAD
           <Route path="/ventas" element={<Ventas />} />
+=======
+          <Route path="/ordenes" element={<Ordenes />} />
+          <Route path="/suscripciones" element={<Suscripciones />} />
+          <Route path="/homep" element={<Homep />} />
+                    <Route path="/enviar-codigo" element={<RequestCode/>}/>
+                    <Route path="/verificar-codigo" element={<VerifyCode/>}/>
+                    <Route path="/nueva-contraseña" element={<NewPassword/>}/>
+>>>>>>> 6615d7e3a665c438aef5756d5f246e25d5fbd9c1
           {/* Puedes agregar más rutas aquí */}
         </Routes>
       </div>
