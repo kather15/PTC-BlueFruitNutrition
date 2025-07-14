@@ -21,6 +21,7 @@ import Carrito from '../src/pages/Carrito/Carrito.jsx'
 import MetodoDePago from "../src/pages/MetodoDePago/CheckoutPage.jsx"
 
 
+
 function App() {
 
 
@@ -43,6 +44,8 @@ function App() {
           <Route path="/detail" element={<ProductDetail />} />
           <Route path="/carrito" element={<Carrito/>} />
           <Route path="/Metodo" element={<MetodoDePago/>} />
+
+
 
             <Route path="/product" element={<ProductC />} />
             <Route path="/producto/:id" element={<ProductsReview />} />

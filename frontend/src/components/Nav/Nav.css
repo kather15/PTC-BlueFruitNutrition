@@ -112,3 +112,29 @@
     width: 200px;
   }
 }
+
+.blue-fruit-logout-btn {
+  margin-left: 20px;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.blue-fruit-logout-btn:hover {
+  background-color: #b22a28;
+}
+
+/* En móvil ajustar margen si es necesario */
+@media (max-width: 768px) {
+  .blue-fruit-logout-btn {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+}
