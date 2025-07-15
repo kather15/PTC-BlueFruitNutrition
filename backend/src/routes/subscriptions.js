@@ -4,7 +4,7 @@ import {
   createSubscription,
   deleteSubscription,
   updateSubscription
-} from '../controllers/CtrlSuscripcioness.js';
+} from '../controllers/CtrlSubscriptions.js';
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-import ShoppingCartModel from "../models/Carrito.js"; 
+import ShoppingCartModel from "../models/ShoppingCart.js"; 
 
 const ShoppingCartController = {};
 

@@ -1,4 +1,4 @@
-import Subscription from '../models/Suscripciones.js';
+import Subscription from '../models/Subscriptions.js';
 
 // Obtener todas las suscripciones
 export const getSubscriptions = async (req, res) => {
