@@ -12,9 +12,10 @@ export default function ResetPassword() {
     const email = localStorage.getItem("recoveryEmail");
 
     const res = await fetch("http://localhost:4000/api/passwordRecovery/newPassword", {
+      credentials: "include",
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ newPassword: password })      
     });
 
     const data = await res.json();
@@ -22,6 +23,7 @@ export default function ResetPassword() {
     if (res.ok) {
       localStorage.removeItem("/");
     }
+ 
   };
 
   return (

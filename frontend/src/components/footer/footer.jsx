@@ -23,15 +23,11 @@ const Footer = () => {
 
         <div className="footer-section">
           <h4>Cuenta</h4>
-          <p>Mi cuenta</p>
           <p>Iniciar sesión / Registrarse</p>
         </div>
 
         <div className="footer-section">
           <h4>Enlaces rápido</h4>
-          <p>Política de Privacidad</p>
-          <p>Condiciones de uso</p>
-          <p>FAQ</p>
           <p>Contacto</p>
         </div>
       </div>

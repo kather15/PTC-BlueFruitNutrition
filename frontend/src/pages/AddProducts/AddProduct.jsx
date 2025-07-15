@@ -1,145 +1,124 @@
-import React, { useState } from "react";
-import "./AddProduct.css";
+// src/pages/AddProducts/AddProduct.jsx
+import React, { useState } from 'react';
+import './AddProduct.css';
 
-const API_URL = "http://localhost:4000/api/products";
-
-function ProductInsert({ onAdded }) {
-  const [form, setForm] = useState({
-    name: "",
-    description: "",
-    flavor: "",
-    price: "",
-    idNutritionalValues: "",
-    image: null,
+function AddProduct() {
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    flavor: '',
+    price: '',
+    image: null
   });
 
+  const [preview, setPreview] = useState(null);
+
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleImageChange = (e) => {
-    setForm({ ...form, image: e.target.files[0] });
+    const file = e.target.files[0];
+    setFormData((prev) => ({ ...prev, image: file }));
+    setPreview(URL.createObjectURL(file));
   };
 
   const handleReset = () => {
-    setForm({
-      name: "",
-      description: "",
-      flavor: "",
-      price: "",
-      idNutritionalValues: "",
-      image: null,
+    setFormData({
+      name: '',
+      description: '',
+      flavor: '',
+      price: '',
+      image: null
     });
+    setPreview(null);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    for (let key in form) {
-      if (form[key]) formData.append(key, form[key]);
+    const data = new FormData();
+    data.append('name', formData.name);
+    data.append('description', formData.description);
+    data.append('flavor', formData.flavor);
+    data.append('price', formData.price);
+    if (formData.image) {
+      data.append('image', formData.image);
     }
 
     try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        body: formData,
+      const response = await fetch('http://localhost:4000/api/products', {
+        method: 'POST',
+        body: data,
       });
 
-      if (res.ok) {
-        onAdded();
+      if (response.ok) {
+        alert('Producto agregado exitosamente');
         handleReset();
-        alert("Producto agregado correctamente");
       } else {
-        alert("Error al agregar el producto.");
+        const error = await response.json();
+        alert('Error al agregar producto: ' + (error.message || 'Error desconocido'));
       }
-    } catch (err) {
-      console.error("Error al enviar:", err);
+    } catch (error) {
+      console.error('Error al enviar producto:', error);
+      alert('Error al enviar el formulario');
     }
   };
 
   return (
-    <div>
+    <div className="add-product-form">
       <h2>Añadir un nuevo Producto</h2>
-      <div className="card-form">
-        <div className="form-left">
-          <div className="image-preview">
-            {form.image ? (
-              <img src={URL.createObjectURL(form.image)} alt="preview" />
-            ) : (
-              <img src="/producticon.png" alt="placeholder" />
-            )}
-          </div>
-          <input
-            type="file"
-            id="imageUploadInsert"
-            accept="image/*"
-            onChange={handleImageChange}
-            hidden
-          />
-          <label htmlFor="imageUploadInsert" className="upload-btn">
-            Subir Imagen
-          </label>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <div className="image-upload">
+          {preview ? (
+            <img src={preview} alt="Vista previa" className="preview-image" />
+          ) : (
+            <div className="image-placeholder">?</div>
+          )}
+          <input type="file" name="image" accept="image/*" onChange={handleImageChange} />
         </div>
 
-        <form className="form-right" onSubmit={handleSubmit}>
+        <div className="form-fields">
           <input
             type="text"
             name="name"
-            placeholder="Nombre:"
-            value={form.name}
+            placeholder="Nombre"
+            value={formData.name}
             onChange={handleChange}
             required
           />
           <textarea
             name="description"
-            placeholder="Descripción:"
-            value={form.description}
+            placeholder="Descripción"
+            value={formData.description}
             onChange={handleChange}
-            rows="4"
             required
           />
-          <div className="row-fields">
-            <input
-              type="text"
-              name="flavor"
-              placeholder="Sabor:"
-              value={form.flavor}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
-              name="price"
-              placeholder="Precio:"
-              value={form.price}
-              onChange={handleChange}
-              required
-            />
-          </div>
           <input
             type="text"
-            name="idNutritionalValues"
-            placeholder="ID Valores Nutricionales (opcional)"
-            value={form.idNutritionalValues}
+            name="flavor"
+            placeholder="Sabor"
+            value={formData.flavor}
             onChange={handleChange}
           />
-          <div className="form-buttons">
-            <button
-              type="button"
-              onClick={handleReset}
-              className="clear-btn"
-            >
-              Limpiar
-            </button>
-            <button type="submit" className="submit-btn">
-              Agregar
-            </button>
-          </div>
-        </form>
-      </div>
+          <input
+            type="number"
+            name="price"
+            placeholder="Contenido Neto"
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-actions">
+          <button type="button" onClick={handleReset}>Limpiar Formulario</button>
+          <button type="submit">Agregar Producto</button>
+        </div>
+      </form>
     </div>
   );
 }
 
-export default ProductInsert;
+export default AddProduct;
