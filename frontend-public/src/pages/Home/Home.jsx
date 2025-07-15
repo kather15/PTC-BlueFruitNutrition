@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './Home.css';
+import { Link } from 'react-router-dom'
+
 
 const productos = [
-  { nombre: 'Carbo Upp', imagen: '/image 1.png' },
-  { nombre: 'Ener Kik', imagen: '/image 2.png' },
-  { nombre: 'Reppo', imagen: '/image 3.png' },
-  { nombre: 'Ener Balance', imagen: '/image 4.png' },
+  { nombre: 'Carbo Upp', imagen: '/CarboUpp.png' },
+  { nombre: 'Ener Kik', imagen: '/EnerKik.png' },
+  { nombre: 'Reppo', imagen: '/Reppo.png' },
+  { nombre: 'Ener Balance', imagen: '/EnerBalance.png' },
 ];
 
 const Home = () => {
@@ -41,10 +43,11 @@ const Home = () => {
         ))}
       </div>
 
-      <div className="blue-fruit-boton-ver-todos-container">
-        <button className="blue-fruit-boton-ver-todos">Ver todos los Productos</button>
-      </div>
-
+     <div className="blue-fruit-boton-ver-todos-container">
+  <Link to="/product" className="blue-fruit-boton-ver-todos">
+    Ver todos los Productos
+  </Link>
+</div>
       {/* Línea separadora debajo del botón */}
       <hr className="blue-fruit-linea-separadora" />
 

@@ -30,7 +30,7 @@ const productsSchema = new Schema({
     idNutritionalValues: {
         type: Schema.Types.ObjectId,
         ref: "NutritionalValues",  // Corregido aquí
-        required: true
+        required: false
     },
 
 }, {

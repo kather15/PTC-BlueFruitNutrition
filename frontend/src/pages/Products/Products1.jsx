@@ -15,6 +15,11 @@ function ProductCard({ product, onEdit, onDelete }) {
         />
       </div>
       <h3 className="product-name">{product.name}</h3>
+      
+      <p className="product-description">{product.description}</p>
+      <p className="product-flavor"><strong>Sabor:</strong> {product.flavor}</p>
+      <p className="product-price"><strong>Precio:</strong> ${product.price}</p>
+      
       <div className="product-buttons">
         <button 
           className="edit-btn"

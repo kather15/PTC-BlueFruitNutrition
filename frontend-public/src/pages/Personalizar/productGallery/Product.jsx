@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './product.css';
+import './Product.css';
 
 const ProductDetail = () => {
   const [currentStep, setCurrentStep] = useState(2); // Producto Final activo

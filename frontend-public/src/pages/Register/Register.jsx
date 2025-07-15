@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import toast from "react-hot-toast";
-import VerifyCodeModal from "../../../../frontend/src/pages/RecoveryPassword/VerifyCode"
+import VerifyCodeModal from "../../components/VerifyCode/VerifyCodeModal"
 import img from '../../assets/imgregister.png'
 import './Register.css'
+import login from "../Login/Login";
 
 function Registro() {
   const [showPassword, setShowPassword] = useState(false);
@@ -74,10 +75,10 @@ function Registro() {
             {showPassword ? <FiEyeOff /> : <FiEye />}
           </button>
         </div>
-        <button type="submit" className="btn-crear">Crear Cuenta</button>
+        <button type="submit" className="btn-crear" href="/login">Crear Cuenta</button>
       </form>
       <p className="registro-login">
-        ¿Ya tienes una cuenta? <a href="/InicioSesion">Inicia Sesión</a>
+        ¿Ya tienes una cuenta? <a href="/login">Inicia Sesión</a>
       </p>
               <VerifyCodeModal isOpen={showModal} onClose={() => setShowModal(false)} />
 

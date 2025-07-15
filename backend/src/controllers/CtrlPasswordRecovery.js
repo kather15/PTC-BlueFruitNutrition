@@ -40,7 +40,7 @@ passwordRecoveryController.requestCode = async (req, res) => {
     //Crear un token que guarde todo
     const token = jsonwebtoken.sign(
       //1-¿que voy a guardar?
-      { email, code, userType, verfied: false },
+      { email, code, userType, verified: true },
       //2-secret key
       config.JWT.secret,
       //3-¿cuando expira?
@@ -86,7 +86,7 @@ passwordRecoveryController.verfiedCode = async(req, res)=>{
                 email: decoded.email,
                 code: decoded.code,
                 userType: decoded.userType,
-                verify: true
+                verified: true
             },
 
             config.JWT.secret,
@@ -123,9 +123,10 @@ passwordRecoveryController.newPassword = async(req, res)=>{
     // Encriptar la contraseña
     const hashedPassword = await bcryptjs.hash(newPassword, 10);
 
+
+
     let updatedUser;
-
-
+    
     if (userType === "customer") {
       updatedUser = await customersModel.findOneAndUpdate(
         { email },
