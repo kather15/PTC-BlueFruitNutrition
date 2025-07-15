@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import './pay.css';
+import './Pay.css';
 
 const Pay = () => {
   const {

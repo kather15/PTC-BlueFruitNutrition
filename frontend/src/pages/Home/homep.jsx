@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Edit, Trash2, Package, Users, BarChart3 } from 'lucide-react';
-import './home.css';
+import './Home.css';
 
 const SportsGelAdmin = () => {
   const [activeTab, setActiveTab] = useState('productos');
