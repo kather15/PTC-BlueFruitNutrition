@@ -110,3 +110,22 @@ node index.js
 cd backend
 npm install
 
+#### ✨ Frontend (frontend/ y frontend-public/)
+Se utiliza camelCase para:
+
+Rutas: para frontend/ y frontend-public
+
+#### ⚙️ Backend (backend/)
+Se utiliza camelCase para:
+
+Rutas (por ejemplo, passwordRecovery)
+
+Se utiliza PascalCase para:
+
+Nombres de modelos (ej. Customers.js, ShoppingCart.js)
+
+Nombres de controladores (ej. CtrlProducts.js)
+
+
+
+
