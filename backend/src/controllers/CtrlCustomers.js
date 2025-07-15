@@ -26,7 +26,7 @@ customersController.postCustomers = async (req, res) => {
         res.status(200).json({ message: "customer saved" })
 
 
-        res.json({ message: "Customer saved" })
+        
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error' });
         console.log("error: " + error)
@@ -40,7 +40,7 @@ customersController.deleteCustomers = async (req, res) => {
         await customersModel.findByIdAndDelete(req.params.id)
         res.status(200).json({ message: "customer deleted" })
 
-        res.json({ message: "Customer deleted" });
+        
 
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error' });
@@ -57,7 +57,7 @@ customersController.putCustomers = async (req, res) => {
             name, lastName, email, password, phone, weight, dateBirth, height,
             address, gender, idSports, isVerified
         }, { new: true })
-        res.json({ message: "Customer updated successfully" })
+    
         res.status(200).json({ message: "customer updated" })
 
     } catch (error) {

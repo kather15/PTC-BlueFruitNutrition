@@ -1,6 +1,6 @@
-// src/components/Carrito.js
 import React, { useState } from "react";
-import ".//Carrito.css";
+import { useNavigate } from "react-router-dom"; // 👈 Importa el hook
+import "./Carrito.css";
 
 const productosIniciales = [
   {
@@ -28,6 +28,7 @@ const productosIniciales = [
 
 const Carrito = () => {
   const [productos, setProductos] = useState(productosIniciales);
+  const navigate = useNavigate(); // 👈 Hook para redirigir
 
   const actualizarCantidad = (id, nuevaCantidad) => {
     const actualizados = productos.map((producto) =>
@@ -48,6 +49,10 @@ const Carrito = () => {
   const total = productos
     .reduce((acc, p) => acc + p.precio * p.cantidad, 0)
     .toFixed(2);
+
+  const irAMetodoDePago = () => {
+    navigate("/Metodo"); // 👈 Redirige a la ruta
+  };
 
   return (
     <div className="carrito-container">
@@ -83,7 +88,7 @@ const Carrito = () => {
                 <td>${calcularSubtotal(producto)}</td>
                 <td>
                   <button onClick={() => eliminarProducto(producto.id)}>
-                    
+                    ❌
                   </button>
                 </td>
               </tr>
@@ -101,7 +106,9 @@ const Carrito = () => {
             <span>Total</span>
             <span>${total}</span>
           </div>
-          <button className="checkout">Check Out</button>
+          <button className="checkout" onClick={irAMetodoDePago}>
+            Check Out
+          </button>
         </div>
       </div>
     </div>

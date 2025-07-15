@@ -1,10 +1,10 @@
 import React from 'react';
 import './Historia.css';
-import atleta from '../assets/atleta.jpg';
-import deportista1 from '/frontend-public/public/image 52.png';
-import deportista2 from '../assets/deportista2.jpg';
-import deportista3 from '../assets/deportista3.jpg';
-import deportista4 from '../assets/deportista4.jpg';
+import atleta from './frontend-public/image 5.png';
+import deportista1 from './frontend-public/public/image 52.png';
+import deportista2 from './frontend-public/public/image 53.png';
+import deportista3 from './frontend-public/public/image 54.png';
+import deportista4 from './frontend-public/public/image 55.png';
 
 const SobreNosotros = () => {
   return (
